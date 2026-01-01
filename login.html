@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pakora GmbH - B2B Partner Login. Zugang für Fachbetriebe. Netto-Preise, Verfügbarkeit und Bestellhistorie.">
+    <meta name="robots" content="noindex, nofollow"> 
+    <title>B2B Login | Pakora GmbH</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. VARIABLEN & RESET --- */
+        :root {
+            --col-primary: #005063;       
+            --col-primary-dark: #003845; 
+            --col-accent: #dba617;        
+            --col-accent-hover: #b88a0e;
+            --col-text-main: #1e293b;
+            --col-text-light: #64748b;
+            --col-bg-body: #f8fafc;
+            --col-bg-white: #ffffff;
+            
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 80, 99, 0.1);
+            
+            --radius: 6px; 
+            --nav-height: 80px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--col-text-main);
+            background-color: var(--col-bg-body);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        h1, h2, h3, h4, .btn { font-family: 'Montserrat', sans-serif; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+
+        /* --- 2. HEADER --- */
+        header {
+            background: white;
+            height: var(--nav-height);
+            border-bottom: 1px solid #e2e8f0;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 2rem;
+            position: sticky; top: 0; z-index: 100;
+        }
+        .logo img { height: 60px; width: auto; }
+        
+        .back-link {
+            font-weight: 600; color: var(--col-text-light); font-size: 0.9rem;
+            display: flex; align-items: center; gap: 0.5rem;
+        }
+        .back-link:hover { color: var(--col-primary); }
+
+        /* --- 3. LOGIN SPLIT LAYOUT --- */
+        .login-wrapper {
+            flex: 1; 
+            display: flex;
+            height: calc(100vh - var(--nav-height) - 80px);
+            min-height: 700px;
+        }
+
+        /* Linke Seite: Formular */
+        .login-side {
+            flex: 1;
+            background: white;
+            display: flex; align-items: center; justify-content: center;
+            padding: 2rem;
+        }
+
+        .login-card {
+            width: 100%; max-width: 420px;
+            animation: slideIn 0.5s ease-out;
+        }
+        @keyframes slideIn { from { opacity:0; transform:translateX(-20px); } to { opacity:1; transform:translateX(0); } }
+
+        .login-header { margin-bottom: 2rem; }
+        .login-header h1 { font-size: 2rem; color: var(--col-primary); margin-bottom: 0.5rem; }
+        .login-header p { color: var(--col-text-light); }
+
+        .form-group { margin-bottom: 1.5rem; position: relative; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--col-text-main); }
+        
+        .form-control {
+            width: 100%; padding: 0.9rem; border: 1px solid #cbd5e1; border-radius: 4px;
+            font-family: inherit; font-size: 1rem; transition: 0.2s;
+        }
+        .form-control:focus { border-color: var(--col-primary); outline: none; box-shadow: 0 0 0 3px rgba(0, 80, 99, 0.1); }
+
+        .password-toggle {
+            position: absolute; right: 15px; top: 38px;
+            color: #94a3b8; cursor: pointer;
+        }
+        .password-toggle:hover { color: var(--col-primary); }
+
+        .btn-login {
+            width: 100%; background: var(--col-primary); color: white; border: none; padding: 1rem;
+            font-size: 1rem; font-weight: 700; border-radius: 4px; cursor: pointer; 
+            margin-top: 1rem; transition: 0.2s; box-shadow: var(--shadow-sm);
+        }
+        .btn-login:hover { background: var(--col-primary-dark); transform: translateY(-2px); }
+
+        .login-options {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 1.5rem; font-size: 0.9rem; color: var(--col-text-light);
+        }
+        .login-options a:hover { color: var(--col-primary); text-decoration: underline; }
+
+        .divider {
+            margin: 2rem 0; text-align: center; border-bottom: 1px solid #e2e8f0; line-height: 0.1em;
+        }
+        .divider span { background: #fff; padding: 0 10px; color: #94a3b8; font-size: 0.9rem; }
+
+        .btn-register {
+            display: block; width: 100%; text-align: center;
+            border: 2px solid #e2e8f0; color: var(--col-text-main);
+            padding: 0.8rem; border-radius: 4px; font-weight: 600;
+        }
+        .btn-register:hover { border-color: var(--col-accent); color: var(--col-accent); background: #fffbeb; }
+
+        /* Rechte Seite: Info/Image */
+        .info-side {
+            flex: 1;
+            background: linear-gradient(135deg, var(--col-primary-dark) 0%, var(--col-primary) 100%);
+            color: white;
+            display: flex; flex-direction: column; justify-content: center;
+            padding: 4rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .pattern {
+            position: absolute; top: 0; left: 0; width: 100%; height: 100%;
+            background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px; opacity: 0.3;
+        }
+
+        .info-content { position: relative; z-index: 2; max-width: 500px; }
+        .info-content h2 { font-size: 2.5rem; margin-bottom: 1.5rem; line-height: 1.2; }
+        .info-content p { font-size: 1.1rem; opacity: 0.9; margin-bottom: 2.5rem; }
+
+        .benefit-list li {
+            margin-bottom: 1rem; display: flex; align-items: center; gap: 1rem; font-size: 1.05rem;
+        }
+        .benefit-list i {
+            color: var(--col-accent); background: rgba(255,255,255,0.1);
+            width: 32px; height: 32px; display: flex; align-items: center; justify-content: center;
+            border-radius: 50%; font-size: 0.9rem;
+        }
+
+        /* --- 4. FOOTER --- */
+        footer {
+            background: #0f172a; color: #64748b; text-align: center; padding: 1.5rem; font-size: 0.85rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 900px) {
+            .info-side { display: none; }
+            .login-wrapper { min-height: auto; padding: 2rem 0; }
+            header { padding: 0 1rem; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Pakora GmbH" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:1.5rem;color:#005063\'>PAKORA</span>'">
+        </a>
+        <a href="index.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Zur Startseite
+        </a>
+    </header>
+
+    <div class="login-wrapper">
+        <div class="login-side">
+            <div class="login-card">
+                <div class="login-header">
+                    <h1>Partner Login</h1>
+                    <p>Willkommen zurück im B2B Portal.</p>
+                </div>
+
+                <form id="loginForm">
+                    <div class="form-group">
+                        <label for="email">E-Mail</label>
+                        <input type="email" id="email" class="form-control" placeholder="ihre@email.de" required autofocus>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="password">Passwort</label>
+                        <input type="password" id="password" class="form-control" placeholder="••••••••" required>
+                        <i class="fa-solid fa-eye password-toggle" onclick="togglePassword()"></i>
+                    </div>
+
+                    <div class="login-options">
+                        <label style="display:flex; gap:0.5rem; align-items:center; cursor:pointer;">
+                            <input type="checkbox"> Angemeldet bleiben
+                        </label>
+                        <a href="#">Passwort vergessen?</a>
+                    </div>
+
+                    <button type="submit" class="btn-login">
+                        <i class="fa-solid fa-lock"></i> Jetzt einloggen
+                    </button>
+                </form>
+
+                <div class="divider">
+                    <span>Noch kein Zugang?</span>
+                </div>
+
+                <a href="register.html" class="btn-register">
+                    Zugang für Fachbetrieb beantragen
+                </a>
+            </div>
+        </div>
+
+        <div class="info-side">
+            <div class="pattern"></div>
+            <div class="info-content">
+                <h2>Exklusiv für Kältefachbetriebe</h2>
+                <p>Nutzen Sie unser Portal für effiziente Projektabwicklung und vollen Zugriff auf unser Sortiment.</p>
+                
+                <ul class="benefit-list">
+                    <li><i class="fa-solid fa-check"></i> Individuelle Netto-Preise</li>
+                    <li><i class="fa-solid fa-check"></i> Echtzeit-Lagerbestand</li>
+                    <li><i class="fa-solid fa-check"></i> Bestellhistorie & Rechnungen</li>
+                    <li><i class="fa-solid fa-check"></i> Technisches Datenblatt-Archiv</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; <span id="year"></span> Pakora GmbH. Alle Rechte vorbehalten. | <a href="#" style="color:#94a3b8">Impressum</a> | <a href="#" style="color:#94a3b8">Datenschutz</a></p>
+    </footer>
+
+    <script>
+        // --- KONFIGURATION (ECHTE SHOPIFY DATEN) ---
+        const SHOPIFY_DOMAIN = 'coolpak.shop';
+        const STOREFRONT_TOKEN = '1f275d04150d3b47bcce6a89092cfcce'; 
+
+        // Passwort Sichtbarkeit umschalten
+        function togglePassword() {
+            const input = document.getElementById('password');
+            const icon = document.querySelector('.password-toggle');
+            
+            if (input.type === "password") {
+                input.type = "text";
+                icon.classList.remove('fa-eye');
+                icon.classList.add('fa-eye-slash');
+            } else {
+                input.type = "password";
+                icon.classList.remove('fa-eye-slash');
+                icon.classList.add('fa-eye');
+            }
+        }
+
+        // ECHTER LOGIN PROZESS
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.querySelector('.btn-login');
+            const originalText = btn.innerHTML;
+            
+            // Lade-Status anzeigen
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Verbinde mit Shop...';
+            btn.style.opacity = '0.8';
+
+            // GraphQL Mutation um Token zu holen
+            const query = `
+            mutation customerAccessTokenCreate($input: CustomerAccessTokenCreateInput!) {
+              customerAccessTokenCreate(input: $input) {
+                customerAccessToken {
+                  accessToken
+                  expiresAt
+                }
+                userErrors {
+                  field
+                  message
+                }
+              }
+            }`;
+
+            const variables = {
+                "input": {
+                    "email": email,
+                    "password": password
+                }
+            };
+
+            try {
+                // Anfrage an Shopify senden
+                const response = await fetch(`https://${SHOPIFY_DOMAIN}/api/2023-04/graphql.json`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-Shopify-Storefront-Access-Token': STOREFRONT_TOKEN
+                    },
+                    body: JSON.stringify({ query, variables })
+                });
+
+                const json = await response.json();
+
+                if (!json.data || !json.data.customerAccessTokenCreate) {
+                    throw new Error("Ungültige Antwort von Shopify");
+                }
+
+                const result = json.data.customerAccessTokenCreate;
+
+                if (result.userErrors.length > 0) {
+                    // Login fehlgeschlagen (z.B. falsches Passwort)
+                    alert("Login fehlgeschlagen: " + result.userErrors[0].message);
+                    btn.innerHTML = originalText;
+                    btn.style.opacity = '1';
+                } else {
+                    // ERFOLG! Token speichern & Weiterleiten
+                    const token = result.customerAccessToken.accessToken;
+                    
+                    // Token im Browser speichern für Dashboard
+                    localStorage.setItem('pakora_customer_token', token);
+
+                    // Weiterleitung zum Dashboard
+                    window.location.href = 'dashboard.html';
+                }
+
+            } catch (error) {
+                console.error("Fehler:", error);
+                alert("Verbindungsfehler zum Shop. Bitte Internet prüfen.");
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+            }
+        });
+
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>

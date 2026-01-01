@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Pakora GmbH - Neukundenregistrierung. Werden Sie B2B Partner.">
+    <meta name="robots" content="noindex, nofollow">
+    
+    <title>Kundenkonto beantragen | Pakora GmbH</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. VARIABLEN & RESET (Identisch) --- */
+        :root {
+            --col-primary: #005063;       
+            --col-primary-dark: #003845; 
+            --col-accent: #dba617;        
+            --col-accent-hover: #b88a0e;
+            --col-text-main: #1e293b;
+            --col-text-light: #64748b;
+            --col-bg-body: #f8fafc;
+            --col-bg-white: #ffffff;
+            
+            --radius: 6px; 
+            --nav-height: 80px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Open Sans', sans-serif;
+            color: var(--col-text-main);
+            background-color: var(--col-bg-body);
+            line-height: 1.6;
+            font-size: 16px;
+            min-height: 100vh;
+            display: flex; flex-direction: column;
+        }
+
+        h1, h2, h3, h4, .btn { font-family: 'Montserrat', sans-serif; }
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+
+        /* --- 2. HEADER --- */
+        header {
+            background: white; height: var(--nav-height); border-bottom: 1px solid #e2e8f0;
+            display: flex; align-items: center; justify-content: space-between;
+            padding: 0 2rem; position: sticky; top: 0; z-index: 100;
+        }
+        .logo img { height: 60px; width: auto; }
+        .back-link { font-weight: 600; color: var(--col-text-light); font-size: 0.9rem; display: flex; align-items: center; gap: 0.5rem; }
+        .back-link:hover { color: var(--col-primary); }
+
+        /* --- 3. REGISTER LAYOUT --- */
+        .register-wrapper {
+            flex: 1; display: flex;
+            /* Auf Desktop volle Höhe abzüglich Header */
+            min-height: calc(100vh - var(--nav-height)); 
+        }
+
+        /* LINKE SEITE (Scrollbar) */
+        .form-side {
+            flex: 1.2;
+            background: white;
+            padding: 3rem 4rem;
+            overflow-y: auto; /* Damit man bei langen Formularen scrollen kann */
+        }
+        
+        .register-card { max-width: 600px; margin: 0 auto; animation: slideIn 0.5s ease-out; }
+        @keyframes slideIn { from { opacity:0; transform:translateY(20px); } to { opacity:1; transform:translateY(0); } }
+
+        .register-header { margin-bottom: 2rem; border-bottom: 1px solid #e2e8f0; padding-bottom: 1rem; }
+        .register-header h1 { font-size: 1.8rem; color: var(--col-primary); margin-bottom: 0.5rem; }
+        .register-header p { color: var(--col-text-light); font-size: 0.95rem; }
+        .badge-b2b {
+            background: #e0f2fe; color: #0284c7; padding: 0.2rem 0.6rem; 
+            border-radius: 4px; font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px;
+            display: inline-block; margin-bottom: 0.5rem;
+        }
+
+        /* FORM SECTIONS */
+        .form-section-title {
+            font-size: 1rem; font-weight: 700; color: var(--col-primary); 
+            margin: 2rem 0 1rem 0; display: flex; align-items: center; gap: 0.5rem;
+        }
+        .form-section-title i { color: var(--col-accent); }
+
+        .form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; }
+        .form-group { margin-bottom: 1.2rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--col-text-main); }
+        .form-group small { display: block; color: var(--col-text-light); font-size: 0.8rem; margin-top: 0.3rem; }
+
+        .form-control {
+            width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 4px;
+            font-family: inherit; font-size: 1rem; transition: 0.2s; background: #fff;
+        }
+        .form-control:focus { border-color: var(--col-primary); outline: none; box-shadow: 0 0 0 3px rgba(0, 80, 99, 0.1); }
+        
+        /* Datei Upload Styling */
+        .file-upload-wrapper {
+            border: 2px dashed #cbd5e1; border-radius: 6px; padding: 1.5rem;
+            text-align: center; cursor: pointer; transition: 0.2s; background: #f8fafc;
+        }
+        .file-upload-wrapper:hover { border-color: var(--col-primary); background: #f0f9ff; }
+        .file-upload-wrapper i { font-size: 1.5rem; color: var(--col-text-light); margin-bottom: 0.5rem; }
+        .file-upload-input { display: none; }
+
+        .btn-submit {
+            width: 100%; background: var(--col-accent); color: white; border: none; padding: 1rem;
+            font-size: 1rem; font-weight: 700; border-radius: 4px; cursor: pointer; 
+            margin-top: 2rem; transition: 0.2s; text-transform: uppercase;
+        }
+        .btn-submit:hover { background: var(--col-accent-hover); transform: translateY(-1px); }
+
+        /* RECHTE SEITE (Sticky) */
+        .info-side {
+            flex: 0.8;
+            background: linear-gradient(135deg, var(--col-primary-dark) 0%, var(--col-primary) 100%);
+            color: white;
+            padding: 4rem;
+            display: flex; flex-direction: column; justify-content: center;
+            position: sticky; top: var(--nav-height); height: calc(100vh - var(--nav-height));
+        }
+        
+        .info-content { max-width: 450px; }
+        .benefit-card {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.15);
+            padding: 1.5rem; border-radius: 8px; margin-bottom: 1.5rem;
+        }
+        .benefit-card h4 { color: var(--col-accent); margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        .benefit-card p { font-size: 0.9rem; opacity: 0.9; line-height: 1.5; }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 1000px) {
+            .register-wrapper { flex-direction: column; }
+            .info-side { 
+                position: relative; height: auto; padding: 3rem 2rem; 
+                top: 0; order: -1; /* Info oben anzeigen auf Mobile */
+            }
+            .form-side { padding: 2rem 1.5rem; }
+            .form-row { grid-template-columns: 1fr; gap: 0; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <a href="index.html" class="logo">
+            <img src="logo.png" alt="Pakora GmbH" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:1.5rem;color:#005063\'>PAKORA</span>'">
+        </a>
+        <a href="login.html" class="back-link">
+            <i class="fa-solid fa-arrow-left"></i> Zum Login
+        </a>
+    </header>
+
+    <div class="register-wrapper">
+        
+        <div class="form-side">
+            <div class="register-card">
+                <div class="register-header">
+                    <span class="badge-b2b">Nur für Gewerbetreibende</span>
+                    <h1>Konto beantragen</h1>
+                    <p>Nach Prüfung Ihrer Unterlagen schalten wir Ihren Zugang frei.</p>
+                </div>
+
+                <form id="registerForm">
+                    <div class="form-section-title"><i class="fa-solid fa-building"></i> Firmendaten</div>
+                    
+                    <div class="form-group">
+                        <label>Firmenname *</label>
+                        <input type="text" class="form-control" placeholder="Muster Kältetechnik GmbH" required>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>USt-IdNr. *</label>
+                            <input type="text" class="form-control" placeholder="DE123456789" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Rechtsform</label>
+                            <select class="form-control">
+                                <option>GmbH</option>
+                                <option>GmbH & Co. KG</option>
+                                <option>Einzelunternehmer</option>
+                                <option>AG</option>
+                                <option>Sonstige</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Straße & Hausnummer *</label>
+                        <input type="text" class="form-control" placeholder="Industriestraße 1" required>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>PLZ *</label>
+                            <input type="text" class="form-control" placeholder="12345" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Ort *</label>
+                            <input type="text" class="form-control" placeholder="Musterstadt" required>
+                        </div>
+                    </div>
+
+                    <div class="form-section-title"><i class="fa-solid fa-user"></i> Ansprechpartner</div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label>Vorname *</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label>Nachname *</label>
+                            <input type="text" class="form-control" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>E-Mail Adresse (für Login) *</label>
+                        <input type="email" class="form-control" placeholder="einkauf@firma.de" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Telefon *</label>
+                        <input type="tel" class="form-control" required>
+                    </div>
+
+                    <div class="form-section-title"><i class="fa-solid fa-file-shield"></i> Legitimierung</div>
+                    
+                    <div class="form-group">
+                        <label>Gewerbeanmeldung hochladen (Optional)</label>
+                        <label class="file-upload-wrapper">
+                            <input type="file" class="file-upload-input" onchange="updateFileName(this)">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <div id="fileName" style="font-size:0.9rem; color:#64748b;">Hier klicken oder Datei ablegen (PDF, JPG)</div>
+                        </label>
+                        <small>Wenn Sie keine Datei zur Hand haben, senden Sie diese bitte später per E-Mail.</small>
+                    </div>
+
+                    <div class="form-group" style="margin-top:2rem;">
+                        <label style="font-weight:400; font-size:0.9rem; display:flex; gap:0.5rem; align-items:start;">
+                            <input type="checkbox" required style="margin-top:4px;">
+                            <span>Ich bestätige, dass ich als Unternehmer handle und die <a href="#" style="text-decoration:underline;">AGB</a> sowie die <a href="#" style="text-decoration:underline;">Datenschutzbestimmungen</a> akzeptiere.</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Registrierung absenden</button>
+                    
+                    <div style="text-align:center; margin-top:1.5rem; font-size:0.9rem; color:var(--col-text-light);">
+                        Bereits Kunde? <a href="login.html" style="color:var(--col-primary); font-weight:600;">Hier einloggen</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="info-side">
+            <div class="info-content">
+                <h2 style="font-size:2.2rem; margin-bottom:1.5rem;">Ihre Vorteile als Partner</h2>
+                
+                <div class="benefit-card">
+                    <h4><i class="fa-solid fa-tag"></i> Großhandelspreise</h4>
+                    <p>Sofortiger Zugriff auf Ihre individuellen Netto-Einkaufskonditionen ohne versteckte Kosten.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h4><i class="fa-solid fa-truck-fast"></i> Express-Logistik</h4>
+                    <p>Bestellungen bis 14:00 Uhr werden noch am selben Tag versendet. Lieferung direkt auf die Baustelle möglich.</p>
+                </div>
+
+                <div class="benefit-card">
+                    <h4><i class="fa-solid fa-headset"></i> Technischer Support</h4>
+                    <p>Direkter Draht zu unseren Kälte-Meistern für Auslegung und Problemlösung.</p>
+                </div>
+
+                <div style="margin-top:2rem; font-size:0.9rem; opacity:0.8;">
+                    <i class="fa-solid fa-circle-info"></i> Die Freischaltung erfolgt in der Regel innerhalb von 24 Stunden (Werktags).
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Datei-Name anzeigen nach Auswahl
+        function updateFileName(input) {
+            const fileNameDisplay = document.getElementById('fileName');
+            if (input.files && input.files.length > 0) {
+                fileNameDisplay.textContent = input.files[0].name;
+                fileNameDisplay.style.color = '#005063';
+                fileNameDisplay.style.fontWeight = '600';
+            } else {
+                fileNameDisplay.textContent = 'Hier klicken oder Datei ablegen (PDF, JPG)';
+                fileNameDisplay.style.color = '#64748b';
+            }
+        }
+
+        // Fake Submit Logik
+        document.getElementById('registerForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const btn = document.querySelector('.btn-submit');
+            const originalText = btn.textContent;
+            
+            btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sende Daten...';
+            btn.style.opacity = '0.8';
+            
+            setTimeout(() => {
+                // Erfolgssimulation: Inhalt austauschen
+                document.querySelector('.register-card').innerHTML = `
+                    <div style="text-align:center; padding:3rem 0; animation: fadeIn 0.5s;">
+                        <i class="fa-solid fa-circle-check" style="font-size:4rem; color:#10b981; margin-bottom:1.5rem;"></i>
+                        <h2 style="color:#005063; margin-bottom:1rem;">Vielen Dank!</h2>
+                        <p style="color:#64748b; font-size:1.1rem;">Wir haben Ihre Registrierung erhalten.</p>
+                        <p style="color:#64748b;">Ein Mitarbeiter prüft Ihre Daten und meldet sich in Kürze per E-Mail bei Ihnen.</p>
+                        <a href="index.html" class="btn-submit" style="display:inline-block; width:auto; margin-top:2rem; background:#005063;">Zur Startseite</a>
+                    </div>
+                `;
+            }, 1500);
+        });
+    </script>
+</body>
+</html>
