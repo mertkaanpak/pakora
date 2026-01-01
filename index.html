@@ -704,7 +704,11 @@
                 <p style="color:#64748b;">Haben Sie eine Projektanfrage oder benötigen Sie technische Beratung?</p>
             </div>
 
-            <form id="contactForm">
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="319b9aa7-59fc-4c17-9c39-34f911a43a05">
+                <input type="hidden" name="subject" value="Neue Anfrage ? Pakora Webseite">
+                <input type="hidden" name="from_name" value="Pakora Webseite">
+                <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Name *</label>
