@@ -1,0 +1,655 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Projektanfrage bei Pakora GmbH - Klima, Kaeltetechnik, Kuehlzellen und Sonderloesungen.">
+    <meta name="robots" content="index, follow">
+
+    <title>Projektanfrage | Pakora GmbH</title>
+
+    <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* --- 1. VARIABLEN & RESET --- */
+        :root {
+            --col-primary: #0a4b5c;
+            --col-primary-dark: #063744;
+            --col-accent: #d49a12;
+            --col-accent-hover: #b4820d;
+            --col-text-main: #1e293b;
+            --col-text-light: #64748b;
+            --col-bg-body: #f5f7fb;
+            --col-bg-white: #ffffff;
+            --col-border: #e2e8f0;
+
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.1);
+            --shadow-card: 0 4px 6px -1px rgba(0,0,0,0.05);
+            --shadow-hover: 0 10px 15px -3px rgba(0, 80, 99, 0.1);
+
+            --radius: 6px;
+            --container-width: 1280px;
+            --nav-height: 80px;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Source Sans 3', sans-serif;
+            color: var(--col-text-main);
+            background-color: var(--col-bg-body);
+            background-image:
+                radial-gradient(1000px 600px at 15% -10%, rgba(10, 75, 92, 0.08), transparent 60%),
+                radial-gradient(900px 500px at 85% 10%, rgba(212, 154, 18, 0.08), transparent 60%);
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        h1, h2, h3, h4, .btn { font-family: 'Sora', sans-serif; }
+
+        a { text-decoration: none; color: inherit; transition: 0.3s ease; }
+        ul { list-style: none; }
+        img { max-width: 100%; height: auto; }
+
+        /* --- 2. HEADER & NAV --- */
+        header {
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            height: var(--nav-height);
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            border-bottom: 1px solid var(--col-border);
+            box-shadow: 0 10px 30px rgba(6, 55, 68, 0.08);
+        }
+
+        .nav-container {
+            max-width: var(--container-width);
+            margin: 0 auto;
+            height: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo img { height: 70px; width: auto; }
+
+        .desktop-nav { display: flex; gap: 2rem; align-items: center; }
+
+        .desktop-nav a {
+            font-weight: 600;
+            color: var(--col-primary);
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .desktop-nav a:hover { color: var(--col-accent); }
+
+        .hamburger { display: none; font-size: 1.5rem; color: var(--col-primary); cursor: pointer; padding: 10px; }
+
+        /* --- 3. HERO SECTION --- */
+        .hero {
+            position: relative;
+            height: 70vh;
+            min-height: 520px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            overflow: hidden;
+            background-color: var(--col-primary-dark);
+        }
+
+        .hero-video {
+            position: absolute;
+            top: 50%; left: 50%;
+            min-width: 100%; min-height: 100%;
+            width: auto; height: auto;
+            transform: translate(-50%, -50%);
+            z-index: 0;
+            object-fit: cover;
+            opacity: 0.82;
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .hero-video { display: none; }
+            .hero { background: linear-gradient(135deg, rgba(0,56,70,1) 0%, rgba(0,30,40,1) 100%); }
+            .hero-content { animation: none; }
+        }
+
+        .hero-overlay {
+            position: absolute;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: linear-gradient(135deg, rgba(6,55,68,0.7) 0%, rgba(3,30,38,0.5) 100%);
+            z-index: 1;
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            max-width: 980px;
+            padding: 0 1.5rem;
+            animation: fadeIn 1s ease-out;
+            text-shadow: 0 2px 6px rgba(0,0,0,0.35);
+        }
+        .hero-kicker {
+            font-size: 0.85rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: rgba(248, 250, 252, 0.8);
+            margin-bottom: 0.8rem;
+        }
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .hero h1 {
+            font-size: 3.1rem;
+            font-weight: 700;
+            line-height: 1.1;
+            margin-bottom: 1rem;
+        }
+
+        .hero-subline {
+            font-size: 1.1rem;
+            font-weight: 400;
+            color: #e2e8f0;
+            margin-bottom: 2.2rem;
+            max-width: 720px;
+            margin-left: auto; margin-right: auto;
+        }
+
+        .hero-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+        .btn {
+            display: inline-flex; align-items: center; justify-content: center;
+            padding: 0.9rem 2rem; border-radius: 50px;
+            font-weight: 600; font-size: 1rem; cursor: pointer; border: none; gap: 0.6rem;
+            transition: 0.3s;
+        }
+
+        .btn-primary { background: var(--col-accent); color: white; }
+        .btn-primary {
+            background: linear-gradient(135deg, var(--col-accent) 0%, #e2b43a 100%);
+            box-shadow: 0 12px 25px rgba(212, 154, 18, 0.3);
+        }
+        .btn-primary:hover { background: var(--col-accent-hover); transform: translateY(-2px); }
+
+        .btn-outline { background: transparent; border: 2px solid rgba(255,255,255,0.3); color: white; }
+        .btn-outline:hover { border-color: white; background: rgba(255,255,255,0.1); }
+
+        /* --- 4. GLOBAL SECTIONS --- */
+        section { padding: 5rem 2rem; max-width: var(--container-width); margin: 0 auto; }
+
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
+        .section-header h2 { font-size: 2rem; color: var(--col-primary); margin-bottom: 0.5rem; position: relative; display: inline-block; }
+        .section-header h2::after {
+            content: "";
+            position: absolute;
+            left: 0; right: 0; bottom: -10px;
+            margin: 0 auto;
+            width: 60px; height: 3px;
+            background: linear-gradient(90deg, var(--col-primary), var(--col-accent));
+            border-radius: 999px;
+        }
+        .section-header p { color: var(--col-text-light); font-size: 1.1rem; }
+
+        /* --- 5. PROJECT TYPES --- */
+        .project-types {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 3rem;
+        }
+        .project-card {
+            background: white;
+            border: 1px solid var(--col-border);
+            border-radius: var(--radius);
+            padding: 1.5rem;
+            box-shadow: var(--shadow-card);
+        }
+        .project-card h4 { color: var(--col-primary); margin-bottom: 0.5rem; }
+        .project-card p { color: var(--col-text-light); font-size: 0.95rem; }
+
+        /* --- 6. CONTACT --- */
+        .contact-section { background: var(--col-primary); color: white; padding-bottom: 5rem; }
+        .contact-wrapper {
+            background: white; color: var(--col-text-main); border-radius: var(--radius);
+            padding: 3rem; max-width: 900px; margin: 0 auto; box-shadow: 0 20px 40px rgba(0,0,0,0.2);
+        }
+        .contact-intro { text-align: center; margin-bottom: 2rem; }
+
+        .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1.5rem; margin-bottom: 1.5rem; }
+        .form-group { margin-bottom: 1.5rem; }
+        .form-group label { display: block; font-size: 0.85rem; font-weight: 600; margin-bottom: 0.5rem; color: var(--col-text-main); }
+
+        .form-control {
+            width: 100%; padding: 0.8rem; border: 1px solid #cbd5e1; border-radius: 4px;
+            font-family: inherit; font-size: 1rem; transition: 0.2s;
+        }
+        .form-control:focus { border-color: var(--col-primary); outline: none; }
+
+        .checkbox-group { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; font-size: 0.9rem; color: var(--col-text-light); }
+        .checkbox-item { display: flex; gap: 0.6rem; align-items: center; }
+
+        .btn-submit {
+            width: 100%; background: var(--col-accent); color: white; border: none; padding: 1rem;
+            font-size: 1rem; font-weight: 700; border-radius: 4px; cursor: pointer; text-transform: uppercase;
+        }
+        .btn-submit:hover { background: var(--col-accent-hover); }
+
+        /* --- 7. FOOTER --- */
+        footer { background: #0f172a; color: #94a3b8; font-size: 0.9rem; padding: 4rem 2rem 2rem; }
+        .footer-content {
+            max-width: var(--container-width); margin: 0 auto; display: grid;
+            grid-template-columns: 1.5fr 1fr 1fr 1.5fr; gap: 3rem;
+        }
+        .footer-col h5 { color: white; margin-bottom: 1.2rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
+        .footer-col ul li { margin-bottom: 0.8rem; }
+
+        .footer-col a { cursor: pointer; }
+        .footer-col a:hover { color: white; }
+
+        .footer-bottom {
+            text-align: center; margin-top: 4rem; padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+        }
+
+        /* --- 8. POPUP MODALS --- */
+        .legal-modal {
+            display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.7);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            padding: 1rem;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        .legal-modal.active {
+            display: flex;
+            opacity: 1;
+        }
+
+        .modal-content {
+            background: white;
+            width: 100%; max-width: 800px;
+            max-height: 85vh;
+            border-radius: var(--radius);
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            display: flex; flex-direction: column;
+            position: relative;
+            transform: translateY(20px);
+            transition: transform 0.3s ease;
+        }
+        .legal-modal.active .modal-content { transform: translateY(0); }
+
+        .modal-header {
+            padding: 1.5rem 2rem;
+            border-bottom: 1px solid #e2e8f0;
+            display: flex; justify-content: space-between; align-items: center;
+        }
+        .modal-header h3 { margin: 0; color: var(--col-primary); font-size: 1.5rem; }
+
+        .close-modal {
+            font-size: 1.8rem; color: #94a3b8; cursor: pointer; transition: 0.2s;
+        }
+        .close-modal:hover { color: var(--col-accent); }
+
+        .modal-body {
+            padding: 2rem;
+            overflow-y: auto;
+            color: var(--col-text-main);
+            font-size: 0.95rem;
+            line-height: 1.7;
+        }
+        .modal-body h4 { margin-top: 1.5rem; margin-bottom: 0.5rem; color: var(--col-primary-dark); }
+        .modal-body p { margin-bottom: 1rem; }
+
+        /* --- MOBILE NAV & OVERLAY --- */
+        .mobile-nav-overlay {
+            position: fixed;
+            top: var(--nav-height); left: 0; width: 100%;
+            background: rgba(255,255,255,0.98);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid #e2e8f0;
+            overflow: hidden;
+            max-height: 0;
+            transition: max-height 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 998;
+            box-shadow: 0 10px 15px -3px rgba(0,0,0,0.1);
+        }
+        .mobile-nav-overlay.active { max-height: 60vh; }
+
+        .mobile-links { padding: 2rem; display: flex; flex-direction: column; gap: 1.5rem; text-align: center; }
+        .mobile-links a { font-size: 1.1rem; font-weight: 600; color: var(--col-primary); }
+        .mobile-links a:hover { color: var(--col-accent); }
+
+        @media (max-width: 900px) {
+            .hero h1 { font-size: 2.1rem; }
+            .form-grid { grid-template-columns: 1fr; }
+            .checkbox-group { grid-template-columns: 1fr; }
+            .desktop-nav { display: none; }
+            .hamburger { display: block; }
+            .footer-content { grid-template-columns: 1fr; text-align: center; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <a href="index.html" class="logo">
+                <img src="logo.png" alt="Pakora GmbH" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:1.5rem;color:#005063\'>PAKORA</span>'">
+            </a>
+
+            <nav class="desktop-nav">
+                <a href="index.html">Startseite</a>
+                <a href="index.html#products">Portfolio</a>
+                <a href="index.html#partners">Partner</a>
+                <a href="index.html#brands">Marken</a>
+                <a href="contact.html">Kontakt</a>
+            </nav>
+
+            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+                <i class="fa-solid fa-bars"></i>
+            </div>
+        </div>
+
+        <div class="mobile-nav-overlay" id="mobileMenu">
+            <div class="mobile-links">
+                <a href="index.html">Startseite</a>
+                <a href="index.html#products">Portfolio</a>
+                <a href="index.html#partners">Partner</a>
+                <a href="index.html#brands">Marken</a>
+                <a href="contact.html">Kontakt</a>
+            </div>
+        </div>
+    </header>
+
+    <section class="hero">
+        <video autoplay muted loop playsinline class="hero-video">
+            <source src="video.mp4" type="video/mp4">
+        </video>
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <div class="hero-kicker">Projektanfrage</div>
+            <h1>Planen Sie ein Klima- oder Kaelteprojekt?</h1>
+            <p class="hero-subline">
+                Teilen Sie uns kurz Ihr Vorhaben mit. Wir unterstuetzen Sie bei Auslegung,
+                Komponentenwahl und Angebotserstellung.
+            </p>
+            <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Anfrage starten</a>
+                <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Zurueck zur Startseite</a>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="section-header">
+            <h2>Wofuer benoetigen Sie eine Loesung?</h2>
+            <p>Wir bearbeiten Projekte jeder Groesse - vom Einzelgeraet bis zur Komplettanlage.</p>
+        </div>
+
+        <div class="project-types">
+            <div class="project-card">
+                <h4>Klimatechnik</h4>
+                <p>Planung, Lieferung und Auslegung fuer Gewerbe und Industrie.</p>
+            </div>
+            <div class="project-card">
+                <h4>Kaeltetechnik</h4>
+                <p>Verdichter, Verfluessiger, Verbundanlagen und Regelung.</p>
+            </div>
+            <div class="project-card">
+                <h4>Kuehlzellen</h4>
+                <p>Standardgroessen oder Sonderfertigungen mit hoher Daemmung.</p>
+            </div>
+            <div class="project-card">
+                <h4>Sonderloesungen</h4>
+                <p>Individuelle Anforderungen fuer Prozess-, Gastro- oder Industriekuehlung.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="contact-wrapper">
+            <div class="contact-intro">
+                <h2 style="font-size:1.8rem; margin-bottom:0.5rem; color:var(--col-primary);">Projektanfrage senden</h2>
+                <p style="color:#64748b;">Je mehr Infos, desto schneller erhalten Sie eine passende Antwort.</p>
+            </div>
+
+            <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
+                <input type="hidden" name="access_key" value="319b9aa7-59fc-4c17-9c39-34f911a43a05">
+                <input type="hidden" name="subject" value="Projektanfrage - Pakora Webseite">
+                <input type="hidden" name="from_name" value="Pakora Projektanfrage">
+                <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Name *</label>
+                        <input name="name" type="text" class="form-control" placeholder="Ihr Name" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Firma *</label>
+                        <input name="company" type="text" class="form-control" placeholder="Firmenname" required>
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>E-Mail *</label>
+                        <input name="email" type="email" class="form-control" placeholder="ihre@email.de" required>
+                    </div>
+                    <div class="form-group">
+                        <label>Telefon (optional)</label>
+                        <input name="phone" type="tel" class="form-control" placeholder="Fuer Rueckfragen">
+                    </div>
+                </div>
+
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Projektstandort</label>
+                        <input name="location" type="text" class="form-control" placeholder="Stadt / PLZ">
+                    </div>
+                    <div class="form-group">
+                        <label>Zeitraum / Start</label>
+                        <input name="timeline" type="text" class="form-control" placeholder="z.B. Q2 2026">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Projektart *</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Klimatechnik"> Klimatechnik</label>
+                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Kaeltetechnik"> Kaeltetechnik</label>
+                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Kuehlzelle"> Kuehlzelle</label>
+                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Sonderloesung"> Sonderloesung</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Projektumfang / Anforderungen</label>
+                    <textarea name="message" class="form-control" rows="5" placeholder="Beschreiben Sie kurz Ihr Projekt, Mengen, Temperaturen, Medium, Besonderheiten."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <div class="checkbox-group" style="grid-template-columns:1fr;">
+                        <label class="checkbox-item">
+                            <input type="checkbox" id="privacy" required>
+                            Ich stimme der Verarbeitung meiner Daten gemaess der <a href="javascript:void(0)" onclick="openModal('modal-datenschutz')" style="text-decoration:underline;">Datenschutzerklaerung</a> zu.
+                        </label>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Projektanfrage absenden</button>
+            </form>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-col">
+                <h5 style="color:white;">Pakora GmbH</h5>
+                <p style="margin-bottom:1rem;">Ihr Grosshandelspartner fuer Kaeltetechnik.<br>Praezision in jedem Bauteil.</p>
+            </div>
+
+            <div class="footer-col">
+                <h5>Unternehmen</h5>
+                <ul>
+                    <li><a href="index.html#about">Ueber uns</a></li>
+                    <li><a href="index.html#partners">Partner</a></li>
+                    <li><a href="contact.html">Kontakt</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Rechtliches</h5>
+                <ul>
+                    <li><a onclick="openModal('modal-impressum')">Impressum</a></li>
+                    <li><a onclick="openModal('modal-datenschutz')">Datenschutz</a></li>
+                    <li><a onclick="openModal('modal-agb')">AGB</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-col">
+                <h5>Kontakt</h5>
+                <ul>
+                    <li>Langemarckstrasse 37a, 45141 Essen</li>
+                    <li><a href="mailto:info@pakorakaelte.de">info@pakorakaelte.de</a></li>
+                    <li>Telefon: folgt</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <p>&copy; <span id="year"></span> Pakora GmbH. Alle Rechte vorbehalten.</p>
+        </div>
+    </footer>
+
+    <div id="modal-impressum" class="legal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Impressum</h3>
+                <div class="close-modal" onclick="closeModal('modal-impressum')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <p><strong>Angaben gemaess Paragraf 5 TMG</strong></p>
+                <p>Pakora GmbH<br>Langemarckstrasse 37a<br>45141 Essen</p>
+                <p><strong>Vertreten durch:</strong><br>[Vorname Nachname des GF]</p>
+                <p><strong>Kontakt:</strong><br>Telefon: [Nummer]<br>E-Mail: info@pakorakaelte.de</p>
+                <p><strong>Registereintrag:</strong><br>Eintragung im Handelsregister.<br>Registergericht: [Stadt]<br>Registernummer: [Nummer]</p>
+                <p><strong>Umsatzsteuer-ID:</strong><br>Umsatzsteuer-Identifikationsnummer gemaess Paragraf 27 a Umsatzsteuergesetz:<br>[DE123456789]</p>
+
+                <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #eee;">
+
+                <p><em>Dies ist ein Platzhalter. Bitte senden Sie mir den vollstaendigen Text.</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-datenschutz" class="legal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Datenschutzerklaerung</h3>
+                <div class="close-modal" onclick="closeModal('modal-datenschutz')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <h4>1. Datenschutz auf einen Blick</h4>
+                <p>Allgemeine Hinweise: Die folgenden Hinweise geben einen einfachen Ueberblick darueber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen...</p>
+
+                <h4>2. Hosting</h4>
+                <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter: [Name Provider]...</p>
+
+                <br><br>
+                <p><em>(Platzhalter Text - hier folgt der Inhalt spaeter)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <div id="modal-agb" class="legal-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Allgemeine Geschaeftsbedingungen</h3>
+                <div class="close-modal" onclick="closeModal('modal-agb')"><i class="fa-solid fa-xmark"></i></div>
+            </div>
+            <div class="modal-body">
+                <h4>Paragraf 1 Geltungsbereich</h4>
+                <p>Fuer die Geschaeftsbeziehung zwischen der Pakora GmbH (nachfolgend "Anbieter") und dem Kunden (nachfolgend "Kunde") gelten ausschliesslich die nachfolgenden Allgemeinen Geschaeftsbedingungen in ihrer zum Zeitpunkt der Bestellung gueltigen Fassung.</p>
+
+                <br><br>
+                <p><em>(Platzhalter Text - hier folgt der Inhalt spaeter)</em></p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // --- 1. Mobile Menu Logic ---
+        const menu = document.getElementById('mobileMenu');
+        const hamburgerIcon = document.querySelector('#hamburger i');
+
+        function toggleMenu() {
+            const isOpen = menu.classList.toggle('active');
+            document.body.style.overflow = isOpen ? 'hidden' : '';
+
+            if (isOpen) {
+                hamburgerIcon.classList.remove('fa-bars');
+                hamburgerIcon.classList.add('fa-xmark');
+            } else {
+                hamburgerIcon.classList.remove('fa-xmark');
+                hamburgerIcon.classList.add('fa-bars');
+            }
+        }
+
+        // --- 2. Modal Logic ---
+        function openModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        }
+
+        function closeModal(modalId) {
+            const modal = document.getElementById(modalId);
+            if (modal) {
+                modal.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        window.onclick = function(event) {
+            if (event.target.classList.contains('legal-modal')) {
+                event.target.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+
+            const header = document.querySelector('header');
+            const hamburger = document.getElementById('hamburger');
+            if (menu.classList.contains('active')) {
+                if (!header.contains(event.target) && !menu.contains(event.target) && !hamburger.contains(event.target)) {
+                    toggleMenu();
+                }
+            }
+        }
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                if (menu.classList.contains('active')) toggleMenu();
+
+                document.querySelectorAll('.legal-modal.active').forEach(modal => {
+                    modal.classList.remove('active');
+                    document.body.style.overflow = '';
+                });
+            }
+        });
+
+        // Dynamic Year
+        document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
+</body>
+</html>
