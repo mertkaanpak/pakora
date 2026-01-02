@@ -374,7 +374,48 @@
             border-top: 1px solid rgba(255,255,255,0.1); 
         }
 
-        /* --- 12. POPUP MODALS (NEU) --- */
+        /* --- 13. COOKIE BANNER --- */
+        .cookie-banner {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            max-width: 420px;
+            background: rgba(255,255,255,0.98);
+            border: 1px solid var(--col-border);
+            border-radius: var(--radius);
+            box-shadow: 0 20px 40px rgba(6, 55, 68, 0.18);
+            padding: 1rem 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            z-index: 10001;
+        }
+        .cookie-text {
+            font-size: 0.9rem;
+            color: var(--col-text-main);
+        }
+        .cookie-btn {
+            background: var(--col-primary);
+            color: white;
+            border: none;
+            padding: 0.6rem 1rem;
+            border-radius: 999px;
+            font-weight: 600;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+        .cookie-btn:hover { background: var(--col-primary-dark); }
+        @media (max-width: 600px) {
+            .cookie-banner {
+                left: 16px;
+                right: 16px;
+                bottom: 16px;
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .cookie-btn { width: 100%; text-align: center; }
+        }
+/* --- 12. POPUP MODALS (NEU) --- */
         .legal-modal {
             display: none; /* Standardmäßig versteckt */
             position: fixed;
@@ -795,7 +836,11 @@
     </footer>
 
 
-    <div id="modal-impressum" class="legal-modal">
+        <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
+        <div class="cookie-text">Diese Webseite nutzt essenzielle Cookies, um die Funktion zu gewaehrleisten.</div>
+        <button id="cookieAccept" class="cookie-btn">OK</button>
+    </div>
+<div id="modal-impressum" class="legal-modal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Impressum</h3>
@@ -920,11 +965,29 @@
             }
         });
 
-        // --- 3. Formular ---\n// Dynamic Year
+        // --- 3. Formular ---\n        // --- 3. Cookie Banner ---
+        (function() {
+            const key = 'pakora_cookie_ok';
+            const banner = document.getElementById('cookieBanner');
+            const button = document.getElementById('cookieAccept');
+            if (!banner || !button) return;
+
+            if (localStorage.getItem(key) === '1') {
+                banner.style.display = 'none';
+                return;
+            }
+
+            button.addEventListener('click', () => {
+                localStorage.setItem(key, '1');
+                banner.style.display = 'none';
+            });
+        })();
+// Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
+
 
 
 
