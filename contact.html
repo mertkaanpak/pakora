@@ -54,6 +54,18 @@
         ul { list-style: none; }
         img { max-width: 100%; height: auto; }
 
+        .link-button {
+            background: none;
+            border: 0;
+            padding: 0;
+            font: inherit;
+            color: var(--col-primary);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .link-button:focus-visible { outline: 2px solid var(--col-accent); outline-offset: 2px; }
+        .footer-link { color: inherit; text-decoration: none; }
+
         /* --- 2. HEADER & NAV --- */
         header {
             background: rgba(255,255,255,0.98);
@@ -89,7 +101,7 @@
         }
         .desktop-nav a:hover { color: var(--col-accent); }
 
-        .hamburger { display: none; font-size: 1.5rem; color: var(--col-primary); cursor: pointer; padding: 10px; }
+        .hamburger { display: none; font-size: 1.5rem; color: var(--col-primary); cursor: pointer; padding: 10px; background: transparent; border: none; }
 
         /* --- 3. HERO SECTION --- */
         .hero {
@@ -250,8 +262,8 @@
         .footer-col h5 { color: white; margin-bottom: 1.2rem; font-size: 1rem; text-transform: uppercase; letter-spacing: 1px; }
         .footer-col ul li { margin-bottom: 0.8rem; }
 
-        .footer-col a { cursor: pointer; }
-        .footer-col a:hover { color: white; }
+        .footer-col a, .footer-col .link-button { cursor: pointer; }
+        .footer-col a:hover, .footer-col .link-button:hover { color: white; }
 
         .footer-bottom {
             text-align: center; margin-top: 4rem; padding-top: 2rem;
@@ -298,6 +310,7 @@
 
         .close-modal {
             font-size: 1.8rem; color: #94a3b8; cursor: pointer; transition: 0.2s;
+            background: none; border: 0; padding: 0;
         }
         .close-modal:hover { color: var(--col-accent); }
 
@@ -344,7 +357,7 @@
 
     <header>
         <div class="nav-container">
-            <a href="index.html" class="logo">
+            <a href="index.html" class="logo" aria-label="Pakora GmbH Startseite">
                 <img src="logo.png" alt="Pakora GmbH" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:1.5rem;color:#005063\'>PAKORA</span>'">
             </a>
 
@@ -356,12 +369,12 @@
                 <a href="contact.html">Kontakt</a>
             </nav>
 
-            <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+            <button class="hamburger" id="hamburger" type="button" onclick="toggleMenu()" aria-label="Menue oeffnen" aria-expanded="false" aria-controls="mobileMenu">
                 <i class="fa-solid fa-bars"></i>
-            </div>
+            </button>
         </div>
 
-        <div class="mobile-nav-overlay" id="mobileMenu">
+        <div class="mobile-nav-overlay" id="mobileMenu" aria-hidden="true">
             <div class="mobile-links">
                 <a href="index.html">Startseite</a>
                 <a href="index.html#products">Portfolio</a>
@@ -373,7 +386,7 @@
     </header>
 
     <section class="hero">
-        <video autoplay muted loop playsinline class="hero-video">
+        <video autoplay muted loop playsinline preload="metadata" class="hero-video">
             <source src="video.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
@@ -433,22 +446,22 @@
                 <div class="form-grid">
                     <div class="form-group">
                         <label>Name *</label>
-                        <input name="name" type="text" class="form-control" placeholder="Ihr Name" required>
+                        <input name="name" type="text" class="form-control" placeholder="Ihr Name" autocomplete="name" required>
                     </div>
                     <div class="form-group">
                         <label>Firma *</label>
-                        <input name="company" type="text" class="form-control" placeholder="Firmenname" required>
+                        <input name="company" type="text" class="form-control" placeholder="Firmenname" autocomplete="organization" required>
                     </div>
                 </div>
 
                 <div class="form-grid">
                     <div class="form-group">
                         <label>E-Mail *</label>
-                        <input name="email" type="email" class="form-control" placeholder="ihre@email.de" required>
+                        <input name="email" type="email" class="form-control" placeholder="ihre@email.de" autocomplete="email" required>
                     </div>
                     <div class="form-group">
                         <label>Telefon (optional)</label>
-                        <input name="phone" type="tel" class="form-control" placeholder="Fuer Rueckfragen">
+                        <input name="phone" type="tel" class="form-control" placeholder="Fuer Rueckfragen" autocomplete="tel" inputmode="tel">
                     </div>
                 </div>
 
@@ -481,8 +494,8 @@
                 <div class="form-group">
                     <div class="checkbox-group" style="grid-template-columns:1fr;">
                         <label class="checkbox-item">
-                            <input type="checkbox" id="privacy" required>
-                            Ich stimme der Verarbeitung meiner Daten gemaess der <a href="javascript:void(0)" onclick="openModal('modal-datenschutz')" style="text-decoration:underline;">Datenschutzerklaerung</a> zu.
+                            <input type="checkbox" id="privacy" name="privacy" required>
+                            Ich stimme der Verarbeitung meiner Daten gemaess der <button type="button" class="link-button" onclick="openModal('modal-datenschutz')" aria-controls="modal-datenschutz">Datenschutzerklaerung</button> zu.
                         </label>
                     </div>
                 </div>
@@ -511,9 +524,9 @@
             <div class="footer-col">
                 <h5>Rechtliches</h5>
                 <ul>
-                    <li><a onclick="openModal('modal-impressum')">Impressum</a></li>
-                    <li><a onclick="openModal('modal-datenschutz')">Datenschutz</a></li>
-                    <li><a onclick="openModal('modal-agb')">AGB</a></li>
+                    <li><button type="button" class="link-button footer-link" onclick="openModal('modal-impressum')" aria-controls="modal-impressum">Impressum</button></li>
+                    <li><button type="button" class="link-button footer-link" onclick="openModal('modal-datenschutz')" aria-controls="modal-datenschutz">Datenschutz</button></li>
+                    <li><button type="button" class="link-button footer-link" onclick="openModal('modal-agb')" aria-controls="modal-agb">AGB</button></li>
                 </ul>
             </div>
 
@@ -532,11 +545,11 @@
         </div>
     </footer>
 
-    <div id="modal-impressum" class="legal-modal">
+    <div id="modal-impressum" class="legal-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-impressum-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Impressum</h3>
-                <div class="close-modal" onclick="closeModal('modal-impressum')"><i class="fa-solid fa-xmark"></i></div>
+                <h3 id="modal-impressum-title">Impressum</h3>
+                <button type="button" class="close-modal" onclick="closeModal('modal-impressum')" aria-label="Schliessen"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
                 <p><strong>Angaben gemaess Paragraf 5 TMG</strong></p>
@@ -553,11 +566,11 @@
         </div>
     </div>
 
-    <div id="modal-datenschutz" class="legal-modal">
+    <div id="modal-datenschutz" class="legal-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-datenschutz-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Datenschutzerklaerung</h3>
-                <div class="close-modal" onclick="closeModal('modal-datenschutz')"><i class="fa-solid fa-xmark"></i></div>
+                <h3 id="modal-datenschutz-title">Datenschutzerklaerung</h3>
+                <button type="button" class="close-modal" onclick="closeModal('modal-datenschutz')" aria-label="Schliessen"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
                 <h4>1. Datenschutz auf einen Blick</h4>
@@ -572,11 +585,11 @@
         </div>
     </div>
 
-    <div id="modal-agb" class="legal-modal">
+    <div id="modal-agb" class="legal-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-agb-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h3>Allgemeine Geschaeftsbedingungen</h3>
-                <div class="close-modal" onclick="closeModal('modal-agb')"><i class="fa-solid fa-xmark"></i></div>
+                <h3 id="modal-agb-title">Allgemeine Geschaeftsbedingungen</h3>
+                <button type="button" class="close-modal" onclick="closeModal('modal-agb')" aria-label="Schliessen"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
                 <h4>Paragraf 1 Geltungsbereich</h4>
@@ -591,11 +604,15 @@
     <script>
         // --- 1. Mobile Menu Logic ---
         const menu = document.getElementById('mobileMenu');
+        const hamburgerButton = document.getElementById('hamburger');
         const hamburgerIcon = document.querySelector('#hamburger i');
 
         function toggleMenu() {
             const isOpen = menu.classList.toggle('active');
             document.body.style.overflow = isOpen ? 'hidden' : '';
+            menu.setAttribute('aria-hidden', String(!isOpen));
+            hamburgerButton.setAttribute('aria-expanded', String(isOpen));
+            hamburgerButton.setAttribute('aria-label', isOpen ? 'Menue schliessen' : 'Menue oeffnen');
 
             if (isOpen) {
                 hamburgerIcon.classList.remove('fa-bars');
@@ -611,6 +628,7 @@
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.classList.add('active');
+                modal.setAttribute('aria-hidden', 'false');
                 document.body.style.overflow = 'hidden';
             }
         }
@@ -619,6 +637,7 @@
             const modal = document.getElementById(modalId);
             if (modal) {
                 modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = '';
             }
         }
@@ -626,6 +645,7 @@
         window.onclick = function(event) {
             if (event.target.classList.contains('legal-modal')) {
                 event.target.classList.remove('active');
+                event.target.setAttribute('aria-hidden', 'true');
                 document.body.style.overflow = '';
             }
 
@@ -644,6 +664,7 @@
 
                 document.querySelectorAll('.legal-modal.active').forEach(modal => {
                     modal.classList.remove('active');
+                    modal.setAttribute('aria-hidden', 'true');
                     document.body.style.overflow = '';
                 });
             }
