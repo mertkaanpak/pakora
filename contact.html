@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Projektanfrage bei Pakora GmbH - Klima, Kaeltetechnik, Kuehlzellen und Sonderloesungen.">
+    <meta name="description" content="Projektanfrage bei Pakora GmbH - Klima, Kältetechnik, Kühlzellen und Sonderlösungen.">
     <meta name="robots" content="index, follow">
 
     <title>Projektanfrage | Pakora GmbH</title>
@@ -100,6 +100,57 @@
             letter-spacing: 0.5px;
         }
         .desktop-nav a:hover { color: var(--col-accent); }
+
+        .nav-phone {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--col-primary) !important;
+            color: white !important;
+            padding: 0.45rem 1rem !important;
+            border-radius: 999px !important;
+            font-size: 0.85rem !important;
+            text-transform: none !important;
+            letter-spacing: 0 !important;
+            white-space: nowrap;
+            transition: background 0.2s, transform 0.2s !important;
+        }
+        .nav-phone:hover { background: var(--col-primary-dark) !important; color: white !important; transform: translateY(-1px); }
+
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9000;
+            background: #25d366;
+            color: white;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6); color: white; }
+        .whatsapp-float .wa-tooltip {
+            position: absolute;
+            right: 68px;
+            background: #0f172a;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .whatsapp-float:hover .wa-tooltip { opacity: 1; }
 
         .hamburger { display: none; font-size: 1.5rem; color: var(--col-primary); cursor: pointer; padding: 10px; background: transparent; border: none; }
 
@@ -367,9 +418,10 @@
                 <a href="index.html#partners">Partner</a>
                 <a href="index.html#brands">Marken</a>
                 <a href="contact.html">Kontakt</a>
+                <a href="tel:+4920143668838" class="nav-phone"><i class="fa-solid fa-phone"></i> 0201 43668838</a>
             </nav>
 
-            <button class="hamburger" id="hamburger" type="button" onclick="toggleMenu()" aria-label="Menue oeffnen" aria-expanded="false" aria-controls="mobileMenu">
+            <button class="hamburger" id="hamburger" type="button" onclick="toggleMenu()" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
                 <i class="fa-solid fa-bars"></i>
             </button>
         </div>
@@ -392,40 +444,40 @@
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <div class="hero-kicker">Projektanfrage</div>
-            <h1>Planen Sie ein Klima- oder Kaelteprojekt?</h1>
+            <h1>Planen Sie ein Klima- oder Kälteprojekt?</h1>
             <p class="hero-subline">
-                Teilen Sie uns kurz Ihr Vorhaben mit. Wir unterstuetzen Sie bei Auslegung,
+                Teilen Sie uns kurz Ihr Vorhaben mit. Wir unterstützen Sie bei Auslegung,
                 Komponentenwahl und Angebotserstellung.
             </p>
             <div class="hero-actions">
                 <a href="#contact" class="btn btn-primary"><i class="fa-solid fa-paper-plane"></i> Anfrage starten</a>
-                <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Zurueck zur Startseite</a>
+                <a href="index.html" class="btn btn-outline"><i class="fa-solid fa-arrow-left"></i> Zurück zur Startseite</a>
             </div>
         </div>
     </section>
 
     <section>
         <div class="section-header">
-            <h2>Wofuer benoetigen Sie eine Loesung?</h2>
-            <p>Wir bearbeiten Projekte jeder Groesse - vom Einzelgeraet bis zur Komplettanlage.</p>
+            <h2>Wofür benötigen Sie eine Lösung?</h2>
+            <p>Wir bearbeiten Projekte jeder Größe – vom Einzelgerät bis zur Komplettanlage.</p>
         </div>
 
         <div class="project-types">
             <div class="project-card">
                 <h4>Klimatechnik</h4>
-                <p>Planung, Lieferung und Auslegung fuer Gewerbe und Industrie.</p>
+                <p>Planung, Lieferung und Auslegung für Gewerbe und Industrie.</p>
             </div>
             <div class="project-card">
-                <h4>Kaeltetechnik</h4>
-                <p>Verdichter, Verfluessiger, Verbundanlagen und Regelung.</p>
+                <h4>Kältetechnik</h4>
+                <p>Verdichter, Verflüssiger, Verbundanlagen und Regelung.</p>
             </div>
             <div class="project-card">
-                <h4>Kuehlzellen</h4>
-                <p>Standardgroessen oder Sonderfertigungen mit hoher Daemmung.</p>
+                <h4>Kühlzellen</h4>
+                <p>Standardgrößen oder Sonderfertigungen mit hoher Dämmung.</p>
             </div>
             <div class="project-card">
-                <h4>Sonderloesungen</h4>
-                <p>Individuelle Anforderungen fuer Prozess-, Gastro- oder Industriekuehlung.</p>
+                <h4>Sonderlösungen</h4>
+                <p>Individuelle Anforderungen für Prozess-, Gastro- oder Industriekühlung.</p>
             </div>
         </div>
     </section>
@@ -480,9 +532,9 @@
                     <label>Projektart *</label>
                     <div class="checkbox-group">
                         <label class="checkbox-item"><input type="checkbox" name="project_type" value="Klimatechnik"> Klimatechnik</label>
-                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Kaeltetechnik"> Kaeltetechnik</label>
-                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Kuehlzelle"> Kuehlzelle</label>
-                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Sonderloesung"> Sonderloesung</label>
+                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Kältetechnik"> Kältetechnik</label>
+                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Kühlzelle"> Kühlzelle</label>
+                        <label class="checkbox-item"><input type="checkbox" name="project_type" value="Sonderlösung"> Sonderlösung</label>
                     </div>
                 </div>
 
@@ -552,17 +604,24 @@
                 <button type="button" class="close-modal" onclick="closeModal('modal-impressum')" aria-label="Schliessen"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
-                <p><strong>Angaben gemaess Paragraf 5 TMG</strong></p>
-                <p>Pakora GmbH<br>Langemarckstrasse 37a<br>45141 Essen</p>
+                <p><strong>Angaben gemäß § 5 TMG</strong></p>
+                <p>Pakora GmbH<br>Langemarckstraße 37a<br>45141 Essen</p>
                 <p><strong>Vertreten durch:</strong><br>Mert Kaan Pak</p>
                 <p><strong>Kontakt:</strong><br>Telefon: <a href="tel:+4920143668838">0201 43668838</a><br>E-Mail: info@pakorakaelte.de</p>
                 <p><strong>Registereintrag:</strong><br>Eintragung im Handelsregister.<br>Registergericht: Amtsgericht Essen<br>Registernummer: HRB 37504</p>
-                <p><strong>Umsatzsteuer-ID:</strong><br>Umsatzsteuer-Identifikationsnummer gemaess Paragraf 27 a Umsatzsteuergesetz:<br>folgt</p>
-                <p><strong>Steuernummer:</strong><br>folgt</p>
+                <p><strong>Umsatzsteuer-ID:</strong><br>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br>DE459873106</p>
+                <p><strong>Steuernummer:</strong><br>5111/5729/1146<br>Finanzamt Essen</p>
 
                 <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #eee;">
 
-                <p><em>Dies ist ein Platzhalter. Bitte senden Sie mir den vollstaendigen Text.</em></p>
+                <h4>Haftungsausschluss</h4>
+                <p>Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir jedoch keine Gewähr. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
+
+                <h4>Haftung für Links</h4>
+                <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber verantwortlich.</p>
+
+                <h4>Urheberrecht</h4>
+                <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung oder Verbreitung bedarf der schriftlichen Zustimmung des jeweiligen Autors.</p>
             </div>
         </div>
     </div>
@@ -570,18 +629,32 @@
     <div id="modal-datenschutz" class="legal-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-datenschutz-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-datenschutz-title">Datenschutzerklaerung</h3>
-                <button type="button" class="close-modal" onclick="closeModal('modal-datenschutz')" aria-label="Schliessen"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="modal-datenschutz-title">Datenschutzerklärung</h3>
+                <button type="button" class="close-modal" onclick="closeModal('modal-datenschutz')" aria-label="Schließen"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
                 <h4>1. Datenschutz auf einen Blick</h4>
-                <p>Allgemeine Hinweise: Die folgenden Hinweise geben einen einfachen Ueberblick darueber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen...</p>
+                <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können.</p>
 
-                <h4>2. Hosting</h4>
-                <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter: [Name Provider]...</p>
+                <h4>2. Verantwortliche Stelle</h4>
+                <p>Pakora GmbH, Langemarckstraße 37a, 45141 Essen<br>Telefon: 0201 43668838 · E-Mail: info@pakorakaelte.de</p>
 
-                <br><br>
-                <p><em>(Platzhalter Text - hier folgt der Inhalt spaeter)</em></p>
+                <h4>3. Hosting (GitHub Pages)</h4>
+                <p>Diese Website wird bei GitHub Pages (GitHub Inc., San Francisco, USA) gehostet. Beim Aufruf werden technisch notwendige Verbindungsdaten verarbeitet (Art. 6 Abs. 1 lit. f DSGVO). GitHub ist nach dem EU-US Data Privacy Framework zertifiziert.</p>
+
+                <h4>4. Kontaktformular</h4>
+                <p>Ihre Angaben (Name, Firma, E-Mail, ggf. Telefon und Nachricht) werden zur Bearbeitung Ihrer Anfrage gespeichert. Die Übermittlung erfolgt über web3forms.com. Rechtsgrundlage: Art. 6 Abs. 1 lit. b bzw. f DSGVO.</p>
+
+                <h4>5. Cookies</h4>
+                <p>Diese Website verwendet ausschließlich technisch notwendige Cookies zur Speicherung Ihrer Cookie-Einstellung. Es werden keine Tracking- oder Marketing-Cookies eingesetzt.</p>
+
+                <h4>6. Ihre Rechte</h4>
+                <p>Sie haben das Recht auf Auskunft, Berichtigung, Löschung, Einschränkung der Verarbeitung, Datenübertragbarkeit und Widerspruch. Kontakt: info@pakorakaelte.de</p>
+
+                <h4>7. Beschwerderecht</h4>
+                <p>Zuständige Aufsichtsbehörde: LDI NRW, Postfach 20 04 44, 40102 Düsseldorf, www.ldi.nrw.de</p>
+
+                <p style="font-size:0.85rem; color:#94a3b8; margin-top:1.5rem;">Stand: März 2026</p>
             </div>
         </div>
     </div>
@@ -589,18 +662,43 @@
     <div id="modal-agb" class="legal-modal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="modal-agb-title">
         <div class="modal-content">
             <div class="modal-header">
-                <h3 id="modal-agb-title">Allgemeine Geschaeftsbedingungen</h3>
-                <button type="button" class="close-modal" onclick="closeModal('modal-agb')" aria-label="Schliessen"><i class="fa-solid fa-xmark"></i></button>
+                <h3 id="modal-agb-title">Allgemeine Geschäftsbedingungen</h3>
+                <button type="button" class="close-modal" onclick="closeModal('modal-agb')" aria-label="Schließen"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
-                <h4>Paragraf 1 Geltungsbereich</h4>
-                <p>Fuer die Geschaeftsbeziehung zwischen der Pakora GmbH (nachfolgend "Anbieter") und dem Kunden (nachfolgend "Kunde") gelten ausschliesslich die nachfolgenden Allgemeinen Geschaeftsbedingungen in ihrer zum Zeitpunkt der Bestellung gueltigen Fassung.</p>
+                <h4>§ 1 Geltungsbereich</h4>
+                <p>Diese AGB gelten für alle Lieferungen und Leistungen der Pakora GmbH gegenüber Unternehmern im Sinne von § 14 BGB. Abweichende Bedingungen des Kunden erkennen wir nur bei ausdrücklicher schriftlicher Zustimmung an.</p>
 
-                <br><br>
-                <p><em>(Platzhalter Text - hier folgt der Inhalt spaeter)</em></p>
+                <h4>§ 2 Vertragsschluss</h4>
+                <p>Unsere Angebote sind freibleibend und unverbindlich. Ein Vertrag kommt erst durch unsere schriftliche Auftragsbestätigung oder durch Ausführung der Lieferung zustande.</p>
+
+                <h4>§ 3 Preise und Zahlung</h4>
+                <p>Es gelten die vereinbarten Preise in Euro zuzüglich gesetzlicher Umsatzsteuer. Rechnungen sind innerhalb von 14 Tagen ohne Abzug zahlbar. Bei Verzug berechnen wir Zinsen von 9 Prozentpunkten über dem Basiszinssatz.</p>
+
+                <h4>§ 4 Lieferung</h4>
+                <p>Liefertermine sind unverbindliche Richtwerte, sofern nicht ausdrücklich als verbindlich bezeichnet. Teillieferungen sind zulässig. Die Gefahr geht mit Übergabe an den Frachtführer auf den Kunden über.</p>
+
+                <h4>§ 5 Eigentumsvorbehalt</h4>
+                <p>Die Ware bleibt bis zur vollständigen Bezahlung aller Forderungen Eigentum der Pakora GmbH.</p>
+
+                <h4>§ 6 Gewährleistung</h4>
+                <p>Mängel sind innerhalb von 8 Werktagen nach Erhalt schriftlich anzuzeigen. Die Gewährleistungsfrist beträgt 12 Monate ab Gefahrübergang.</p>
+
+                <h4>§ 7 Haftungsbeschränkung</h4>
+                <p>Schadensersatzansprüche sind ausgeschlossen, außer bei Verletzung von Leben, Körper oder Gesundheit sowie bei Vorsatz oder grober Fahrlässigkeit.</p>
+
+                <h4>§ 8 Anwendbares Recht und Gerichtsstand</h4>
+                <p>Es gilt deutsches Recht unter Ausschluss des UN-Kaufrechts. Gerichtsstand ist Essen, sofern der Kunde Vollkaufmann ist.</p>
+
+                <p style="font-size:0.85rem; color:#94a3b8; margin-top:1.5rem;">Stand: März 2026</p>
             </div>
         </div>
     </div>
+
+    <a href="https://wa.me/4920143668838" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="WhatsApp Kontakt">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="wa-tooltip">WhatsApp schreiben</span>
+    </a>
 
     <script>
         // --- 1. Mobile Menu Logic ---
@@ -613,7 +711,7 @@
             document.body.style.overflow = isOpen ? 'hidden' : '';
             menu.setAttribute('aria-hidden', String(!isOpen));
             hamburgerButton.setAttribute('aria-expanded', String(isOpen));
-            hamburgerButton.setAttribute('aria-label', isOpen ? 'Menue schliessen' : 'Menue oeffnen');
+            hamburgerButton.setAttribute('aria-label', isOpen ? 'Menü schließen' : 'Menü öffnen');
 
             if (isOpen) {
                 hamburgerIcon.classList.remove('fa-bars');

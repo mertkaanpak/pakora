@@ -113,6 +113,62 @@
         }
         .desktop-nav a:hover { color: var(--col-accent); }
 
+        .nav-phone {
+            display: inline-flex !important;
+            align-items: center;
+            gap: 0.4rem;
+            background: var(--col-primary) !important;
+            color: white !important;
+            padding: 0.45rem 1rem !important;
+            border-radius: 999px !important;
+            font-size: 0.85rem !important;
+            text-transform: none !important;
+            letter-spacing: 0 !important;
+            white-space: nowrap;
+            transition: background 0.2s, transform 0.2s !important;
+        }
+        .nav-phone:hover { background: var(--col-primary-dark) !important; color: white !important; transform: translateY(-1px); }
+
+        /* WhatsApp Floating Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 28px;
+            right: 28px;
+            z-index: 9000;
+            background: #25d366;
+            color: white;
+            width: 58px;
+            height: 58px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.6rem;
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.45);
+            transition: transform 0.2s, box-shadow 0.2s;
+            text-decoration: none;
+        }
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 8px 28px rgba(37, 211, 102, 0.6);
+            color: white;
+        }
+        .whatsapp-float .wa-tooltip {
+            position: absolute;
+            right: 68px;
+            background: #0f172a;
+            color: white;
+            padding: 0.4rem 0.8rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            white-space: nowrap;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.2s;
+        }
+        .whatsapp-float:hover .wa-tooltip { opacity: 1; }
+
         .hamburger { display: none; font-size: 1.5rem; color: var(--col-primary); cursor: pointer; padding: 10px; background: transparent; border: none; }
 
         /* --- 3. HERO SECTION --- */
@@ -294,8 +350,12 @@
         .service-tile {
             flex: 1 1 300px; background: white; padding: 2rem; text-align: center;
             border-radius: var(--radius); box-shadow: var(--shadow-sm);
+            border-bottom: 3px solid transparent;
+            transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
         }
-        .service-tile i { font-size: 2rem; color: var(--col-primary); margin-bottom: 1rem; }
+        .service-tile:hover { border-bottom-color: var(--col-accent); box-shadow: var(--shadow-hover); transform: translateY(-3px); }
+        .service-tile i { font-size: 2rem; color: var(--col-primary); margin-bottom: 1rem; display: block; transition: color 0.2s; }
+        .service-tile:hover i { color: var(--col-accent); }
         .service-tile h4 { margin-bottom: 0.5rem; font-size: 1.1rem; }
         .service-tile p { font-size: 0.9rem; color: var(--col-text-light); }
 
@@ -341,19 +401,28 @@
             transition: transform 0.2s ease, box-shadow 0.2s ease;
         }
         .brand-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-hover); }
-        .brand-card img { max-height: 60px; filter: grayscale(100%); opacity: 0.8; }
+        .brand-card img { max-height: 60px; filter: grayscale(60%); opacity: 0.75; transition: filter 0.25s, opacity 0.25s; }
         .brand-card:hover img { filter: grayscale(0%); opacity: 1; }
         
         /* --- 9. BRANCHEN --- */
-        .industry-bar { padding: 3rem 2rem; text-align: center; background: white; }
+        .industry-bar { padding: 3.5rem 2rem; text-align: center; background: linear-gradient(135deg, var(--col-primary-dark) 0%, var(--col-primary) 100%); }
+        .industry-bar h3 { color: white !important; font-size: 1.4rem; margin-bottom: 0.3rem; }
+        .industry-bar-sub { color: rgba(255,255,255,0.7); font-size: 0.95rem; margin-bottom: 2rem; display: block; }
         .ind-grid {
-            display: flex; justify-content: center; flex-wrap: wrap; gap: 3rem; margin-top: 2rem;
+            display: flex; justify-content: center; flex-wrap: wrap; gap: 1.5rem; margin-top: 0;
         }
-        .ind-item { 
-            display: flex; flex-direction: column; align-items: center; gap: 0.8rem; 
+        .ind-item {
+            display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
+            background: rgba(255,255,255,0.08);
+            border: 1px solid rgba(255,255,255,0.15);
+            border-radius: var(--radius);
+            padding: 1.2rem 1.8rem;
+            min-width: 150px;
+            transition: background 0.2s, transform 0.2s;
         }
-        .ind-item i { font-size: 1.8rem; color: #94a3b8; }
-        .ind-item span { color: var(--col-text-light); font-weight: 600; font-size: 0.95rem; }
+        .ind-item:hover { background: rgba(255,255,255,0.15); transform: translateY(-2px); }
+        .ind-item i { font-size: 1.6rem; color: var(--col-accent); }
+        .ind-item span { color: rgba(255,255,255,0.92); font-weight: 600; font-size: 0.9rem; }
 
         /* --- 10. KONTAKT --- */
         .contact-section { background: var(--col-primary); color: white; padding-bottom: 5rem; }
@@ -556,6 +625,7 @@
                 <a href="#brands">Marken</a>
                 <a href="#contact">Kontakt</a>
                 <a href="contact.html">Projektanfrage</a>
+                <a href="tel:+4920143668838" class="nav-phone"><i class="fa-solid fa-phone"></i> 0201 43668838</a>
             </nav>
 
             <button class="hamburger" id="hamburger" type="button" onclick="toggleMenu()" aria-label="Menü öffnen" aria-expanded="false" aria-controls="mobileMenu">
@@ -768,7 +838,8 @@
     </section>
 
     <div class="industry-bar">
-        <h3 style="color:var(--col-primary); font-size:1.5rem;">Wir beliefern</h3>
+        <h3>Wir beliefern</h3>
+        <span class="industry-bar-sub">Unsere Kunden kommen aus allen Bereichen der Kälte- und Klimatechnik.</span>
         <div class="ind-grid">
             <div class="ind-item">
                 <i class="fa-solid fa-wrench"></i> <span>Kältefachbetriebe</span>
@@ -794,7 +865,7 @@
 
             <form id="contactForm" action="https://api.web3forms.com/submit" method="POST">
                 <input type="hidden" name="access_key" value="319b9aa7-59fc-4c17-9c39-34f911a43a05">
-                <input type="hidden" name="subject" value="Neue Anfrage ? Pakora Webseite">
+                <input type="hidden" name="subject" value="Neue Anfrage – Pakora Webseite">
                 <input type="hidden" name="from_name" value="Pakora Webseite">
                 <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
                 <div class="form-grid">
@@ -841,8 +912,9 @@
     <footer>
         <div class="footer-content">
             <div class="footer-col">
-                <h5 style="color:white;">Pakora GmbH</h5>
+                <img src="logo.png" alt="Pakora GmbH" style="height:52px; width:auto; object-fit:contain; margin-bottom:1rem; filter:brightness(0) invert(1); opacity:0.9;" onerror="this.style.display='none'">
                 <p style="margin-bottom:1rem;">Ihr Großhandelspartner für Kältetechnik.<br>Präzision in jedem Bauteil.</p>
+                <p style="font-size:0.85rem; color:#64748b;">Langemarckstraße 37a<br>45141 Essen</p>
             </div>
 
             <div class="footer-col">
@@ -880,10 +952,15 @@
     </footer>
 
 
-            <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
+            <a href="https://wa.me/4920143668838" target="_blank" rel="noopener noreferrer" class="whatsapp-float" aria-label="WhatsApp Kontakt">
+        <i class="fa-brands fa-whatsapp"></i>
+        <span class="wa-tooltip">WhatsApp schreiben</span>
+    </a>
+
+    <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
         <div class="cookie-text">
-            Diese Webseite nutzt essenzielle Cookies, um die Funktion zu gewaehrleisten.
-            <button type="button" class="cookie-link" onclick="openModal('modal-datenschutz')" aria-controls="modal-datenschutz">Datenschutzerklaerung</button>
+            Diese Webseite nutzt essenzielle Cookies, um die Funktion zu gewährleisten.
+            <button type="button" class="cookie-link" onclick="openModal('modal-datenschutz')" aria-controls="modal-datenschutz">Datenschutzerklärung</button>
         </div>
         <div class="cookie-actions">
             <button id="cookieAccept" class="cookie-btn">Akzeptieren</button>
@@ -899,7 +976,7 @@
                 <button type="button" class="close-modal" onclick="closeModal('modal-cookies')" aria-label="Schließen"><i class="fa-solid fa-xmark"></i></button>
             </div>
             <div class="modal-body">
-                <p>Hier koennen Sie festlegen, welche Cookies Sie zulassen moechten.</p>
+                <p>Hier können Sie festlegen, welche Cookies Sie zulassen möchten.</p>
                 <div class="cookie-options">
                     <label class="cookie-option"><input type="checkbox" checked disabled> Essenzielle Cookies (immer aktiv)</label>
                     <label class="cookie-option"><input type="checkbox" id="cookieAnalytics"> Statistik</label>
@@ -922,12 +999,19 @@
                 <p><strong>Vertreten durch:</strong><br>Mert Kaan Pak</p>
                 <p><strong>Kontakt:</strong><br>Telefon: <a href="tel:+4920143668838">0201 43668838</a><br>E-Mail: info@pakorakaelte.de</p>
                 <p><strong>Registereintrag:</strong><br>Eintragung im Handelsregister.<br>Registergericht: Amtsgericht Essen<br>Registernummer: HRB 37504</p>
-                <p><strong>Umsatzsteuer-ID:</strong><br>Umsatzsteuer-Identifikationsnummer gemäß §27 a Umsatzsteuergesetz:<br>folgt</p>
-                <p><strong>Steuernummer:</strong><br>folgt</p>
+                <p><strong>Umsatzsteuer-ID:</strong><br>Umsatzsteuer-Identifikationsnummer gemäß § 27a UStG:<br>DE459873106</p>
+                <p><strong>Steuernummer:</strong><br>5111/5729/1146<br>Finanzamt Essen</p>
                 
                 <hr style="margin: 1.5rem 0; border: 0; border-top: 1px solid #eee;">
-                
-                <p><em>Dies ist ein Platzhalter. Bitte senden Sie mir den vollständigen Text.</em></p>
+
+                <h4>Haftungsausschluss</h4>
+                <p>Die Inhalte dieser Website wurden mit größter Sorgfalt erstellt. Für die Richtigkeit, Vollständigkeit und Aktualität der Inhalte übernehmen wir jedoch keine Gewähr. Als Diensteanbieter sind wir gemäß § 7 Abs. 1 TMG für eigene Inhalte auf diesen Seiten nach den allgemeinen Gesetzen verantwortlich.</p>
+
+                <h4>Haftung für Links</h4>
+                <p>Unser Angebot enthält Links zu externen Websites Dritter, auf deren Inhalte wir keinen Einfluss haben. Deshalb können wir für diese fremden Inhalte auch keine Gewähr übernehmen. Für die Inhalte der verlinkten Seiten ist stets der jeweilige Anbieter oder Betreiber der Seiten verantwortlich.</p>
+
+                <h4>Urheberrecht</h4>
+                <p>Die durch die Seitenbetreiber erstellten Inhalte und Werke auf diesen Seiten unterliegen dem deutschen Urheberrecht. Die Vervielfältigung, Bearbeitung, Verbreitung und jede Art der Verwertung außerhalb der Grenzen des Urheberrechtes bedürfen der schriftlichen Zustimmung des jeweiligen Autors bzw. Erstellers.</p>
             </div>
         </div>
     </div>
@@ -940,13 +1024,32 @@
             </div>
             <div class="modal-body">
                 <h4>1. Datenschutz auf einen Blick</h4>
-                <p>Allgemeine Hinweise: Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen...</p>
-                
-                <h4>2. Hosting</h4>
-                <p>Wir hosten die Inhalte unserer Website bei folgendem Anbieter: [Name Provider]...</p>
+                <p>Die folgenden Hinweise geben einen einfachen Überblick darüber, was mit Ihren personenbezogenen Daten passiert, wenn Sie diese Website besuchen. Personenbezogene Daten sind alle Daten, mit denen Sie persönlich identifiziert werden können. Ausführliche Informationen zum Thema Datenschutz entnehmen Sie unserer unter diesem Text aufgeführten Datenschutzerklärung.</p>
 
-                <br><br>
-                <p><em>(Platzhalter Text - hier folgt der Inhalt später)</em></p>
+                <h4>2. Verantwortliche Stelle</h4>
+                <p>Verantwortlich für die Datenverarbeitung auf dieser Website ist:<br>
+                <strong>Pakora GmbH</strong><br>
+                Langemarckstraße 37a<br>
+                45141 Essen<br>
+                Telefon: 0201 43668838<br>
+                E-Mail: info@pakorakaelte.de</p>
+
+                <h4>3. Hosting (GitHub Pages)</h4>
+                <p>Diese Website wird bei GitHub Pages (GitHub Inc., 88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA) gehostet. Beim Aufruf der Website werden technisch notwendige Verbindungsdaten (z. B. IP-Adresse, Browsertyp, Datum und Uhrzeit des Zugriffs) im Rahmen von Server-Logfiles verarbeitet. Dies dient dem sicheren Betrieb des Angebots (Art. 6 Abs. 1 lit. f DSGVO). GitHub kann die Übermittlung von Daten in die USA nicht ausschließen. GitHub ist nach dem EU-US Data Privacy Framework zertifiziert.</p>
+
+                <h4>4. Kontaktformular</h4>
+                <p>Wenn Sie uns über das Kontaktformular eine Anfrage zukommen lassen, werden Ihre Angaben (Name, Firma, E-Mail, ggf. Telefon und Nachricht) zur Bearbeitung der Anfrage und für den Fall von Anschlussfragen gespeichert. Die Übermittlung erfolgt über den Dienst web3forms.com (Web3Forms, Sharjah, UAE). Die Daten werden ausschließlich zur Bearbeitung Ihrer Anfrage verwendet und nicht an Dritte weitergegeben. Rechtsgrundlage: Art. 6 Abs. 1 lit. b DSGVO (Vertragsanbahnung) bzw. Art. 6 Abs. 1 lit. f DSGVO (berechtigtes Interesse).</p>
+
+                <h4>5. Cookies</h4>
+                <p>Diese Website verwendet ausschließlich technisch notwendige Cookies (z. B. zur Speicherung Ihrer Cookie-Einstellung). Es werden keine Tracking- oder Marketing-Cookies eingesetzt. Technisch notwendige Cookies erfordern keine gesonderte Einwilligung (Art. 6 Abs. 1 lit. f DSGVO).</p>
+
+                <h4>6. Ihre Rechte</h4>
+                <p>Sie haben jederzeit das Recht auf unentgeltliche Auskunft über Ihre gespeicherten personenbezogenen Daten, deren Herkunft und Empfänger sowie den Zweck der Datenverarbeitung. Sie haben außerdem ein Recht auf Berichtigung, Sperrung oder Löschung dieser Daten sowie auf Einschränkung der Verarbeitung, ein Widerspruchsrecht und das Recht auf Datenübertragbarkeit. Hierfür sowie für weitere Fragen zum Thema Datenschutz wenden Sie sich bitte an: info@pakorakaelte.de</p>
+
+                <h4>7. Beschwerderecht</h4>
+                <p>Sie haben das Recht, sich bei der zuständigen Datenschutzaufsichtsbehörde zu beschweren. Zuständige Behörde für die Pakora GmbH ist die Landesbeauftragte für Datenschutz und Informationsfreiheit Nordrhein-Westfalen (LDI NRW), Postfach 20 04 44, 40102 Düsseldorf, www.ldi.nrw.de</p>
+
+                <p style="font-size:0.85rem; color:#94a3b8; margin-top:1.5rem;">Stand: März 2026</p>
             </div>
         </div>
     </div>
@@ -957,12 +1060,35 @@
                 <h3 id="modal-agb-title">Allgemeine Geschäftsbedingungen</h3>
                 <button type="button" class="close-modal" onclick="closeModal('modal-agb')" aria-label="Schließen"><i class="fa-solid fa-xmark"></i></button>
             </div>
-            <div class="modal-body">
-                <h4>§1 Geltungsbereich</h4>
-                <p>Für die Geschäftsbeziehung zwischen der Pakora GmbH (nachfolgend „Anbieter“) und dem Kunden (nachfolgend „Kunde“) gelten ausschließlich die nachfolgenden Allgemeinen Geschäftsbedingungen in ihrer zum Zeitpunkt der Bestellung gültigen Fassung.</p>
+            <div class=”modal-body”>
+                <h4>§ 1 Geltungsbereich</h4>
+                <p>Diese Allgemeinen Geschäftsbedingungen (AGB) gelten für alle Lieferungen und Leistungen der Pakora GmbH, Langemarckstraße 37a, 45141 Essen (nachfolgend „Pakora”), gegenüber Unternehmern im Sinne von § 14 BGB (nachfolgend „Kunde”). Entgegenstehende oder abweichende Bedingungen des Kunden erkennen wir nur an, wenn wir diesen ausdrücklich schriftlich zugestimmt haben.</p>
 
-                <br><br>
-                <p><em>(Platzhalter Text - hier folgt der Inhalt später)</em></p>
+                <h4>§ 2 Vertragsschluss</h4>
+                <p>Unsere Angebote sind freibleibend und unverbindlich. Ein Vertrag kommt erst durch unsere schriftliche Auftragsbestätigung oder durch Ausführung der Lieferung zustande. Bestellungen des Kunden gelten als verbindliches Vertragsangebot. Änderungen und Ergänzungen bedürfen der Schriftform.</p>
+
+                <h4>§ 3 Preise und Zahlung</h4>
+                <p>Es gelten die zum Zeitpunkt der Bestellung vereinbarten Preise in Euro, zuzüglich der gesetzlichen Umsatzsteuer. Rechnungen sind innerhalb von 14 Tagen nach Rechnungsdatum ohne Abzug zahlbar, sofern nicht schriftlich anders vereinbart. Bei Zahlungsverzug sind wir berechtigt, Verzugszinsen in Höhe von 9 Prozentpunkten über dem Basiszinssatz zu berechnen.</p>
+
+                <h4>§ 4 Lieferung</h4>
+                <p>Liefertermine sind, sofern nicht ausdrücklich als verbindlich bezeichnet, unverbindliche Richtwerte. Teillieferungen sind zulässig. Die Gefahr des zufälligen Untergangs und der zufälligen Verschlechterung der Ware geht mit Übergabe an den Spediteur, Frachtführer oder sonstige zur Ausführung der Versendung bestimmte Person auf den Kunden über. Lieferverzögerungen aufgrund höherer Gewalt oder unvorhersehbarer Ereignisse berechtigen uns, die Lieferung um die Dauer des Hindernisses hinauszuschieben.</p>
+
+                <h4>§ 5 Eigentumsvorbehalt</h4>
+                <p>Die gelieferte Ware bleibt bis zur vollständigen Bezahlung aller Forderungen aus der Geschäftsbeziehung Eigentum der Pakora GmbH. Der Kunde ist zur Weiterveräußerung im ordentlichen Geschäftsbetrieb berechtigt. Er tritt uns bereits jetzt alle Forderungen in Höhe des Rechnungsbetrages ab, die ihm durch die Weiterveräußerung entstehen.</p>
+
+                <h4>§ 6 Gewährleistung</h4>
+                <p>Für Sachmängel gilt das gesetzliche Gewährleistungsrecht. Mängel sind unverzüglich, spätestens innerhalb von 8 Werktagen nach Erhalt der Ware schriftlich anzuzeigen, versteckte Mängel unverzüglich nach Entdeckung. Die Gewährleistungsfrist beträgt 12 Monate ab Gefahrübergang. Weitergehende Ansprüche, insbesondere auf Schadensersatz wegen Mangelfolgeschäden, sind ausgeschlossen, soweit nicht vorsätzliches oder grob fahrlässiges Verhalten vorliegt.</p>
+
+                <h4>§ 7 Haftungsbeschränkung</h4>
+                <p>Schadensersatzansprüche des Kunden sind ausgeschlossen, soweit nachfolgend nichts anderes bestimmt ist. Dies gilt nicht für Schäden aus der Verletzung des Lebens, des Körpers oder der Gesundheit sowie für Schäden aus der Verletzung wesentlicher Vertragspflichten. Ebenso gilt dies nicht für Schäden, die auf vorsätzlichem oder grob fahrlässigem Verhalten beruhen.</p>
+
+                <h4>§ 8 Anwendbares Recht und Gerichtsstand</h4>
+                <p>Es gilt das Recht der Bundesrepublik Deutschland unter Ausschluss des UN-Kaufrechts (CISG). Gerichtsstand für alle Streitigkeiten aus und im Zusammenhang mit diesem Vertrag ist, sofern der Kunde Vollkaufmann ist, Essen.</p>
+
+                <h4>§ 9 Salvatorische Klausel</h4>
+                <p>Sollten einzelne Bestimmungen dieser AGB unwirksam oder undurchführbar sein oder nach Vertragsschluss unwirksam oder undurchführbar werden, bleibt die Wirksamkeit der übrigen Bestimmungen davon unberührt.</p>
+
+                <p style=”font-size:0.85rem; color:#94a3b8; margin-top:1.5rem;”>Stand: März 2026</p>
             </div>
         </div>
     </div>
