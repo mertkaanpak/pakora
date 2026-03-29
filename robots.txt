@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+Disallow: /login.html
+Disallow: /register.html
+Disallow: /dashboard.html
+
+Sitemap: https://www.pakorakaelte.de/sitemap.xml
