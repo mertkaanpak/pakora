@@ -663,6 +663,96 @@
             .hamburger { display: block; }
             .footer-content { grid-template-columns: 1fr; text-align: center; }
         }
+
+        /* ============================================================
+           PREMIUM LAYER — Animationen & Feinschliff
+           ============================================================ */
+
+        /* Scroll-Reveal */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.7s cubic-bezier(0.22,1,0.36,1), transform 0.7s cubic-bezier(0.22,1,0.36,1); will-change: opacity, transform; }
+        .reveal.in-view { opacity: 1; transform: none; }
+
+        /* Header: mitscrollender Zustand */
+        header, .logo img { transition: height 0.32s ease, box-shadow 0.32s ease, background 0.32s ease; }
+        header.scrolled { height: 66px; box-shadow: 0 10px 30px rgba(6,55,68,0.13); background: rgba(255,255,255,0.99); }
+        header.scrolled .logo img { height: 52px; }
+
+        /* Hero: Gradient-Akzentwort + Badge + Stagger-Einblendung */
+        .hero h1 .accent {
+            background: linear-gradient(120deg, var(--col-accent) 0%, #f4ca5e 100%);
+            -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        .hero-kicker {
+            display: inline-block;
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.28);
+            padding: 0.45rem 1.1rem; border-radius: 999px;
+            backdrop-filter: blur(6px);
+        }
+        .hero-content > * { opacity: 0; transform: translateY(26px); animation: heroUp 0.9s cubic-bezier(0.22,1,0.36,1) forwards; }
+        .hero-content > *:nth-child(1) { animation-delay: 0.15s; }
+        .hero-content > *:nth-child(2) { animation-delay: 0.30s; }
+        .hero-content > *:nth-child(3) { animation-delay: 0.45s; }
+        .hero-content > *:nth-child(4) { animation-delay: 0.60s; }
+        .hero-content > *:nth-child(5) { animation-delay: 0.75s; }
+        @keyframes heroUp { to { opacity: 1; transform: none; } }
+
+        /* Scroll-Indikator */
+        .scroll-indicator {
+            position: absolute; bottom: 26px; left: 50%; transform: translateX(-50%);
+            z-index: 2; color: rgba(255,255,255,0.85); font-size: 1.3rem;
+            animation: scrollBounce 2s infinite; cursor: pointer; text-decoration: none;
+        }
+        @keyframes scrollBounce { 0%,20%,50%,80%,100% { transform: translateX(-50%) translateY(0); } 40% { transform: translateX(-50%) translateY(-10px); } 60% { transform: translateX(-50%) translateY(-5px); } }
+
+        /* Statistik-Band */
+        .stats-band { background: white; border-bottom: 1px solid var(--col-border); }
+        .stats-grid { max-width: var(--container-width); margin: 0 auto; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1rem; padding: 2.6rem 2rem; text-align: center; }
+        .stat-item { padding: 0.5rem 1rem; position: relative; }
+        .stat-item:not(:last-child)::after { content: ""; position: absolute; right: 0; top: 18%; height: 64%; width: 1px; background: var(--col-border); }
+        .stat-number { font-family: 'Sora', sans-serif; font-size: 2.7rem; font-weight: 700; color: var(--col-primary); line-height: 1; letter-spacing: -1.5px; }
+        .stat-number .suffix { color: var(--col-accent); }
+        .stat-label { margin-top: 0.5rem; font-size: 0.9rem; color: var(--col-text-light); font-weight: 600; }
+        @media (max-width: 700px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; gap: 1.5rem 1rem; }
+            .stat-item:nth-child(2)::after { display: none; }
+            .stat-number { font-size: 2.1rem; }
+        }
+
+        /* Button-Glanz-Effekt */
+        .btn-primary { position: relative; overflow: hidden; }
+        .btn-primary::after {
+            content: ""; position: absolute; top: 0; left: -80%; width: 60%; height: 100%;
+            background: linear-gradient(120deg, transparent, rgba(255,255,255,0.35), transparent);
+            transform: skewX(-20deg); transition: left 0.6s ease;
+        }
+        .btn-primary:hover::after { left: 130%; }
+
+        /* Card-Feinschliff: weichere Bewegung */
+        .usp-card, .product-item, .service-tile, .partner-card, .brand-card {
+            transition: transform 0.3s cubic-bezier(0.22,1,0.36,1), box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Back-to-Top */
+        .back-to-top {
+            position: fixed; bottom: 96px; right: 30px; z-index: 8000;
+            width: 44px; height: 44px; border-radius: 50%;
+            background: var(--col-primary); color: white; border: none; cursor: pointer;
+            display: flex; align-items: center; justify-content: center; font-size: 1rem;
+            box-shadow: 0 6px 18px rgba(6,55,68,0.3);
+            opacity: 0; visibility: hidden; transform: translateY(10px);
+            transition: opacity 0.3s, visibility 0.3s, transform 0.3s, background 0.2s;
+        }
+        .back-to-top.visible { opacity: 1; visibility: visible; transform: none; }
+        .back-to-top:hover { background: var(--col-primary-dark); }
+
+        /* Barrierefreiheit: Bewegung reduzieren */
+        @media (prefers-reduced-motion: reduce) {
+            .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+            .hero-content > * { opacity: 1 !important; transform: none !important; animation: none !important; }
+            .scroll-indicator { animation: none; }
+            .btn-primary::after { display: none; }
+        }
     </style>
 </head>
 <body>
@@ -709,9 +799,9 @@
 
     <div class="hero-content">
             <div class="hero-kicker">Pakora GmbH · Essen · DACH-Region</div>
-            <h1>Kältetechnik Großhandel<br>für Fachbetriebe</h1>
+            <h1>Kältetechnik <span class="accent">Großhandel</span><br>für Fachbetriebe</h1>
             <p class="hero-subline">Verflüssigungssätze, Verdichter, Kühlzellen & Systemlösungen – schnell verfügbar, technisch beraten, B2B-Konditionen.</p>
-            
+
             <div class="hero-trust">
                 <span><i class="fa-solid fa-check"></i> Schnelle Verfügbarkeit</span>
                 <span><i class="fa-solid fa-check"></i> Technische Beratung</span>
@@ -725,6 +815,28 @@
                 <a href="#contact" class="btn btn-outline">
                     <i class="fa-solid fa-phone"></i> Anfrage / Rückruf
                 </a>
+            </div>
+        </div>
+        <a href="#stats" class="scroll-indicator" aria-label="Nach unten scrollen"><i class="fa-solid fa-chevron-down"></i></a>
+    </section>
+
+    <section id="stats" class="stats-band" style="padding:0; max-width:none; margin:0;">
+        <div class="stats-grid">
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="12" data-suffix="+">0</div>
+                <div class="stat-label">Premium-Marken</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="6">0</div>
+                <div class="stat-label">Produktgruppen</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number" data-target="24" data-suffix="h">0</div>
+                <div class="stat-label">Reaktionszeit</div>
+            </div>
+            <div class="stat-item reveal">
+                <div class="stat-number">DACH</div>
+                <div class="stat-label">Liefergebiet</div>
             </div>
         </div>
     </section>
@@ -1012,6 +1124,8 @@
         <span class="wa-tooltip">WhatsApp schreiben</span>
     </a>
 
+    <button type="button" class="back-to-top" id="backToTop" aria-label="Nach oben scrollen"><i class="fa-solid fa-arrow-up"></i></button>
+
     <div id="cookieBanner" class="cookie-banner" role="dialog" aria-live="polite" aria-label="Cookie Hinweis">
         <div class="cookie-text">
             Diese Webseite nutzt essenzielle Cookies, um die Funktion zu gewährleisten.
@@ -1297,6 +1411,81 @@
 
         // Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Premium: Scroll-Reveal, Header-State, Counter, Back-to-Top ---
+        (function() {
+            const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            // Reveal-Klasse automatisch auf Sektionselemente anwenden
+            const revealTargets = document.querySelectorAll(
+                '.section-header, .usp-card, .product-item, .service-tile, .partner-card, .brand-card, .ind-item, .proof-strip, .contact-wrapper'
+            );
+            revealTargets.forEach(el => el.classList.add('reveal'));
+
+            // Gestaffelte Verzögerung innerhalb von Gruppen
+            function stagger(selector) {
+                document.querySelectorAll(selector).forEach((group) => {
+                    Array.from(group.children).forEach((child, i) => {
+                        if (child.classList.contains('reveal')) {
+                            child.style.transitionDelay = (i * 0.08) + 's';
+                        }
+                    });
+                });
+            }
+            stagger('.usp-grid'); stagger('.product-grid'); stagger('.service-grid');
+            stagger('.partner-wrapper'); stagger('.brand-grid'); stagger('.ind-grid');
+
+            function animateCounter(el) {
+                const target = parseFloat(el.getAttribute('data-target'));
+                const suffix = el.getAttribute('data-suffix') || '';
+                const duration = 1400;
+                const start = performance.now();
+                function tick(now) {
+                    const p = Math.min((now - start) / duration, 1);
+                    const eased = 1 - Math.pow(1 - p, 3);
+                    const val = Math.round(eased * target);
+                    el.innerHTML = val + (suffix ? '<span class="suffix">' + suffix + '</span>' : '');
+                    if (p < 1) requestAnimationFrame(tick);
+                }
+                requestAnimationFrame(tick);
+            }
+
+            if ('IntersectionObserver' in window && !reduceMotion) {
+                const io = new IntersectionObserver((entries, obs) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('in-view');
+                            const counter = entry.target.querySelector && entry.target.querySelector('.stat-number[data-target]');
+                            if (counter) animateCounter(counter);
+                            obs.unobserve(entry.target);
+                        }
+                    });
+                }, { threshold: 0.15, rootMargin: '0px 0px -40px 0px' });
+                document.querySelectorAll('.reveal').forEach(el => io.observe(el));
+            } else {
+                document.querySelectorAll('.reveal').forEach(el => el.classList.add('in-view'));
+                document.querySelectorAll('.stat-number[data-target]').forEach(el => {
+                    el.innerHTML = el.getAttribute('data-target') + (el.getAttribute('data-suffix') ? '<span class="suffix">' + el.getAttribute('data-suffix') + '</span>' : '');
+                });
+            }
+
+            // Header-Scroll-Zustand
+            const header = document.querySelector('header');
+            const backToTop = document.getElementById('backToTop');
+            function onScroll() {
+                const y = window.scrollY;
+                if (header) header.classList.toggle('scrolled', y > 40);
+                if (backToTop) backToTop.classList.toggle('visible', y > 500);
+            }
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+
+            if (backToTop) {
+                backToTop.addEventListener('click', () => {
+                    window.scrollTo({ top: 0, behavior: reduceMotion ? 'auto' : 'smooth' });
+                });
+            }
+        })();
 
         // --- Kontaktformular: AJAX-Absenden mit Inline-Erfolg ---
         (function() {
