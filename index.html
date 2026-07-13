@@ -76,6 +76,9 @@
     }
     </script>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
@@ -807,6 +810,46 @@
             .spectrum-zone small { display: none; }
         }
 
+        /* ---- Anker-Sprung-Korrektur (Sticky-Header) ---- */
+        section[id], div[id="stats"] { scroll-margin-top: 90px; }
+
+        /* ---- Aktiver Navigationspunkt beim Scrollen ---- */
+        .desktop-nav a { position: relative; }
+        .desktop-nav a.active-link { color: var(--col-accent); }
+        .desktop-nav a.active-link:not(.nav-phone)::after {
+            content: ""; position: absolute; left: 0; right: 0; bottom: -6px; height: 2px;
+            background: var(--col-accent); border-radius: 2px; transform-origin: left; animation: navUnderline 0.3s ease;
+        }
+        @keyframes navUnderline { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+        /* ---- Tastatur-Fokus (Barrierefreiheit) ---- */
+        a:focus-visible, button:focus-visible, input:focus-visible,
+        select:focus-visible, textarea:focus-visible {
+            outline: 2px solid var(--col-accent); outline-offset: 2px; border-radius: 4px;
+        }
+
+        /* ---- Prozess-Sektion "So läuft Ihre Anfrage ab" ---- */
+        .process-section { padding: 5rem 2rem; max-width: var(--container-width); margin: 0 auto; }
+        .process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5rem; margin-top: 3rem; position: relative; }
+        .process-grid::before {
+            content: ""; position: absolute; top: 32px; left: 12%; right: 12%; height: 2px; z-index: 1;
+            background: linear-gradient(90deg, var(--col-border), var(--col-primary) 50%, var(--col-border));
+        }
+        .process-step { text-align: center; position: relative; padding: 0 0.5rem; }
+        .process-num {
+            width: 66px; height: 66px; margin: 0 auto 1.3rem; border-radius: 50%;
+            background: white; border: 2px solid var(--col-border); color: var(--col-primary);
+            font-family: 'Sora', sans-serif; font-weight: 700; font-size: 1.5rem;
+            display: flex; align-items: center; justify-content: center;
+            position: relative; z-index: 2; box-shadow: var(--shadow-sm);
+            transition: transform 0.3s, border-color 0.3s, color 0.3s;
+        }
+        .process-step:hover .process-num { border-color: var(--col-accent); color: var(--col-accent); transform: translateY(-4px); }
+        .process-step h4 { color: var(--col-primary); margin-bottom: 0.5rem; font-size: 1.05rem; }
+        .process-step p { color: var(--col-text-light); font-size: 0.9rem; line-height: 1.55; }
+        @media (max-width: 800px) { .process-grid { grid-template-columns: 1fr 1fr; gap: 2.5rem 1.5rem; } .process-grid::before { display: none; } }
+        @media (max-width: 480px) { .process-grid { grid-template-columns: 1fr; } }
+
         @media (prefers-reduced-motion: reduce) {
             .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
             .hero-content > * { opacity: 1 !important; transform: none !important; animation: none !important; }
@@ -1120,6 +1163,35 @@
             </div>
         </div>
     </div>
+
+    <section id="process" class="process-section">
+        <div class="section-header">
+            <h2>So läuft Ihre Anfrage ab</h2>
+            <p>Vom ersten Kontakt bis zur Lieferung – transparent und unkompliziert.</p>
+        </div>
+        <div class="process-grid">
+            <div class="process-step reveal">
+                <div class="process-num">1</div>
+                <h4>Anfrage</h4>
+                <p>Sie schildern uns Ihr Projekt oder nennen die benötigten Komponenten.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-num">2</div>
+                <h4>Beratung &amp; Auslegung</h4>
+                <p>Wir prüfen die Anforderungen und schlagen die passende Lösung vor.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-num">3</div>
+                <h4>Angebot</h4>
+                <p>Sie erhalten ein transparentes Angebot mit Stückliste und Preisen.</p>
+            </div>
+            <div class="process-step reveal">
+                <div class="process-num">4</div>
+                <h4>Lieferung</h4>
+                <p>Schnell ab Lager – auf Wunsch direkt auf Ihre Baustelle.</p>
+            </div>
+        </div>
+    </section>
 
     <section id="contact" class="contact-section">
         <div class="contact-wrapper">
@@ -1531,7 +1603,7 @@
                 });
             }
             stagger('.usp-grid'); stagger('.product-grid'); stagger('.service-grid');
-            stagger('.partner-wrapper'); stagger('.ind-grid');
+            stagger('.partner-wrapper'); stagger('.ind-grid'); stagger('.process-grid');
 
             function animateCounter(el) {
                 const target = parseFloat(el.getAttribute('data-target'));
@@ -1577,6 +1649,23 @@
             }
             window.addEventListener('scroll', onScroll, { passive: true });
             onScroll();
+
+            // Scroll-Spy: aktiven Navigationspunkt markieren
+            const navLinks = Array.from(document.querySelectorAll('.desktop-nav a[href^="#"]'));
+            const spySections = navLinks
+                .map(a => document.querySelector(a.getAttribute('href')))
+                .filter(Boolean);
+            if ('IntersectionObserver' in window && spySections.length) {
+                const spy = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = '#' + entry.target.id;
+                            navLinks.forEach(a => a.classList.toggle('active-link', a.getAttribute('href') === id));
+                        }
+                    });
+                }, { rootMargin: '-45% 0px -50% 0px', threshold: 0 });
+                spySections.forEach(s => spy.observe(s));
+            }
 
             if (backToTop) {
                 backToTop.addEventListener('click', () => {
@@ -1658,7 +1747,7 @@
                         const rect = card.getBoundingClientRect();
                         const px = (e.clientX - rect.left) / rect.width;
                         const py = (e.clientY - rect.top) / rect.height;
-                        card.style.transform = 'perspective(800px) rotateX(' + ((py - 0.5) * -7) + 'deg) rotateY(' + ((px - 0.5) * 7) + 'deg) translateY(-4px)';
+                        card.style.transform = 'perspective(900px) rotateX(' + ((py - 0.5) * -5) + 'deg) rotateY(' + ((px - 0.5) * 5) + 'deg) translateY(-3px)';
                         glare.style.setProperty('--gx', (px * 100) + '%');
                         glare.style.setProperty('--gy', (py * 100) + '%');
                     });
