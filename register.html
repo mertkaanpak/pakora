@@ -164,22 +164,27 @@
                     <p>Nach Prüfung Ihrer Unterlagen schalten wir Ihren Zugang frei.</p>
                 </div>
 
-                <form id="registerForm">
+                <form id="registerForm" action="https://api.web3forms.com/submit" method="POST">
+                    <input type="hidden" name="access_key" value="319b9aa7-59fc-4c17-9c39-34f911a43a05">
+                    <input type="hidden" name="subject" value="Neue B2B-Registrierung – Pakora Webseite">
+                    <input type="hidden" name="from_name" value="Pakora Registrierung">
+                    <input type="checkbox" name="botcheck" class="hidden" style="display:none;">
+
                     <div class="form-section-title"><i class="fa-solid fa-building"></i> Firmendaten</div>
-                    
+
                     <div class="form-group">
                         <label>Firmenname *</label>
-                        <input type="text" class="form-control" placeholder="Muster Kältetechnik GmbH" required>
+                        <input name="Firmenname" type="text" class="form-control" placeholder="Muster Kältetechnik GmbH" autocomplete="organization" required>
                     </div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label>USt-IdNr. *</label>
-                            <input type="text" class="form-control" placeholder="DE123456789" required>
+                            <input name="USt-IdNr" type="text" class="form-control" placeholder="DE123456789" required>
                         </div>
                         <div class="form-group">
                             <label>Rechtsform</label>
-                            <select class="form-control">
+                            <select name="Rechtsform" class="form-control">
                                 <option>GmbH</option>
                                 <option>GmbH & Co. KG</option>
                                 <option>Einzelunternehmer</option>
@@ -191,45 +196,45 @@
 
                     <div class="form-group">
                         <label>Straße & Hausnummer *</label>
-                        <input type="text" class="form-control" placeholder="Industriestraße 1" required>
+                        <input name="Strasse" type="text" class="form-control" placeholder="Industriestraße 1" autocomplete="street-address" required>
                     </div>
 
                     <div class="form-row">
                         <div class="form-group">
                             <label>PLZ *</label>
-                            <input type="text" class="form-control" placeholder="12345" required>
+                            <input name="PLZ" type="text" class="form-control" placeholder="12345" autocomplete="postal-code" required>
                         </div>
                         <div class="form-group">
                             <label>Ort *</label>
-                            <input type="text" class="form-control" placeholder="Musterstadt" required>
+                            <input name="Ort" type="text" class="form-control" placeholder="Musterstadt" autocomplete="address-level2" required>
                         </div>
                     </div>
 
                     <div class="form-section-title"><i class="fa-solid fa-user"></i> Ansprechpartner</div>
-                    
+
                     <div class="form-row">
                         <div class="form-group">
                             <label>Vorname *</label>
-                            <input type="text" class="form-control" required>
+                            <input name="Vorname" type="text" class="form-control" autocomplete="given-name" required>
                         </div>
                         <div class="form-group">
                             <label>Nachname *</label>
-                            <input type="text" class="form-control" required>
+                            <input name="Nachname" type="text" class="form-control" autocomplete="family-name" required>
                         </div>
                     </div>
 
                     <div class="form-group">
                         <label>E-Mail Adresse (für Login) *</label>
-                        <input type="email" class="form-control" placeholder="einkauf@firma.de" required>
+                        <input name="email" type="email" class="form-control" placeholder="einkauf@firma.de" autocomplete="email" required>
                     </div>
 
                     <div class="form-group">
                         <label>Telefon *</label>
-                        <input type="tel" class="form-control" required>
+                        <input name="Telefon" type="tel" class="form-control" autocomplete="tel" inputmode="tel" required>
                     </div>
 
                     <div class="form-section-title"><i class="fa-solid fa-file-shield"></i> Legitimierung</div>
-                    
+
                     <div class="form-group">
                         <label>Gewerbeanmeldung hochladen (Optional)</label>
                         <label class="file-upload-wrapper">
@@ -237,15 +242,17 @@
                             <i class="fa-solid fa-cloud-arrow-up"></i>
                             <div id="fileName" style="font-size:0.9rem; color:#64748b;">Hier klicken oder Datei ablegen (PDF, JPG)</div>
                         </label>
-                        <small>Wenn Sie keine Datei zur Hand haben, senden Sie diese bitte später per E-Mail.</small>
+                        <small>Bitte senden Sie Ihre Gewerbeanmeldung nach Absenden des Formulars zusätzlich per E-Mail an <a href="mailto:info@pakorakaelte.de" style="color:var(--col-primary); text-decoration:underline;">info@pakorakaelte.de</a>.</small>
                     </div>
 
                     <div class="form-group" style="margin-top:2rem;">
                         <label style="font-weight:400; font-size:0.9rem; display:flex; gap:0.5rem; align-items:start;">
-                            <input type="checkbox" required style="margin-top:4px;">
-                            <span>Ich bestätige, dass ich als Unternehmer handle und die <a href="#" style="text-decoration:underline;">AGB</a> sowie die <a href="#" style="text-decoration:underline;">Datenschutzbestimmungen</a> akzeptiere.</span>
+                            <input name="AGB akzeptiert" type="checkbox" value="Ja" required style="margin-top:4px;">
+                            <span>Ich bestätige, dass ich als Unternehmer handle und die <a href="index.html#agb" target="_blank" rel="noopener" style="text-decoration:underline;">AGB</a> sowie die <a href="index.html#datenschutz" target="_blank" rel="noopener" style="text-decoration:underline;">Datenschutzbestimmungen</a> akzeptiere.</span>
                         </label>
                     </div>
+
+                    <div id="registerError" style="color:#dc2626; font-size:0.9rem; margin-bottom:1rem; min-height:1.2rem;"></div>
 
                     <button type="submit" class="btn-submit">Registrierung absenden</button>
                     
@@ -297,27 +304,47 @@
             }
         }
 
-        // Fake Submit Logik
-        document.getElementById('registerForm').addEventListener('submit', (e) => {
+        // Echte Übermittlung an web3forms
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
             e.preventDefault();
-            const btn = document.querySelector('.btn-submit');
+            const form = e.target;
+            const btn = form.querySelector('.btn-submit');
+            const errorBox = document.getElementById('registerError');
             const originalText = btn.textContent;
-            
+            errorBox.textContent = '';
+
             btn.innerHTML = '<i class="fa-solid fa-circle-notch fa-spin"></i> Sende Daten...';
             btn.style.opacity = '0.8';
-            
-            setTimeout(() => {
-                // Erfolgssimulation: Inhalt austauschen
-                document.querySelector('.register-card').innerHTML = `
-                    <div style="text-align:center; padding:3rem 0; animation: fadeIn 0.5s;">
-                        <i class="fa-solid fa-circle-check" style="font-size:4rem; color:#10b981; margin-bottom:1.5rem;"></i>
-                        <h2 style="color:#005063; margin-bottom:1rem;">Vielen Dank!</h2>
-                        <p style="color:#64748b; font-size:1.1rem;">Wir haben Ihre Registrierung erhalten.</p>
-                        <p style="color:#64748b;">Ein Mitarbeiter prüft Ihre Daten und meldet sich in Kürze per E-Mail bei Ihnen.</p>
-                        <a href="index.html" class="btn-submit" style="display:inline-block; width:auto; margin-top:2rem; background:#005063;">Zur Startseite</a>
-                    </div>
-                `;
-            }, 1500);
+            btn.disabled = true;
+
+            try {
+                const formData = new FormData(form);
+                const response = await fetch('https://api.web3forms.com/submit', {
+                    method: 'POST',
+                    body: formData
+                });
+                const json = await response.json();
+
+                if (json.success) {
+                    document.querySelector('.register-card').innerHTML = `
+                        <div style="text-align:center; padding:3rem 0; animation: fadeIn 0.5s;">
+                            <i class="fa-solid fa-circle-check" style="font-size:4rem; color:#10b981; margin-bottom:1.5rem;"></i>
+                            <h2 style="color:var(--col-primary); margin-bottom:1rem;">Vielen Dank!</h2>
+                            <p style="color:#64748b; font-size:1.1rem;">Wir haben Ihre Registrierung erhalten.</p>
+                            <p style="color:#64748b;">Ein Mitarbeiter prüft Ihre Daten und meldet sich in Kürze per E-Mail bei Ihnen.</p>
+                            <a href="index.html" class="btn-submit" style="display:inline-block; width:auto; margin-top:2rem;">Zur Startseite</a>
+                        </div>
+                    `;
+                } else {
+                    throw new Error(json.message || 'Übermittlung fehlgeschlagen');
+                }
+            } catch (error) {
+                console.error('Fehler:', error);
+                errorBox.textContent = 'Es gab ein Problem beim Absenden. Bitte versuchen Sie es erneut oder schreiben Sie an info@pakorakaelte.de.';
+                btn.innerHTML = originalText;
+                btn.style.opacity = '1';
+                btn.disabled = false;
+            }
         });
     </script>
 </body>

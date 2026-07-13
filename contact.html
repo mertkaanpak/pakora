@@ -806,6 +806,32 @@
 
         // Dynamic Year
         document.getElementById('year').textContent = new Date().getFullYear();
+
+        // --- Kontaktformular: AJAX-Absenden mit Inline-Erfolg ---
+        (function() {
+            const form = document.getElementById('contactForm');
+            if (!form) return;
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                const btn = form.querySelector('button[type="submit"]');
+                const original = btn ? btn.innerHTML : '';
+                if (btn) { btn.innerHTML = 'Wird gesendet...'; btn.disabled = true; }
+                try {
+                    const res = await fetch('https://api.web3forms.com/submit', { method: 'POST', body: new FormData(form) });
+                    const json = await res.json();
+                    if (!json.success) throw new Error(json.message || 'Fehler');
+                    const wrapper = form.closest('.contact-wrapper');
+                    wrapper.innerHTML = `<div style="text-align:center; padding:2.5rem 1rem; animation: fadeIn 0.5s ease-out;">
+                        <i class="fa-solid fa-circle-check" style="font-size:3.5rem; color:#10b981; margin-bottom:1.2rem;"></i>
+                        <h2 style="color:var(--col-primary); margin-bottom:0.6rem;">Vielen Dank!</h2>
+                        <p style="color:#64748b; font-size:1.05rem;">Ihre Projektanfrage ist bei uns eingegangen.<br>Wir melden uns schnellstmöglich bei Ihnen.</p>
+                    </div>`;
+                } catch (err) {
+                    if (btn) { btn.innerHTML = original; btn.disabled = false; }
+                    alert('Es gab ein Problem beim Senden. Bitte versuchen Sie es erneut oder rufen Sie uns unter 0201 43668838 an.');
+                }
+            });
+        })();
     </script>
 </body>
 </html>
