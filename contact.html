@@ -88,6 +88,8 @@
         a { text-decoration: none; color: inherit; transition: 0.3s ease; }
         ul { list-style: none; }
         img { max-width: 100%; height: auto; }
+        picture { display: contents; }
+        picture > source { display: none; }
 
         .link-button {
             background: none;
@@ -502,7 +504,7 @@
     <header>
         <div class="nav-container">
             <a href="index.html" class="logo" aria-label="Pakora GmbH Startseite">
-                <img src="logo.png" alt="Pakora GmbH" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:1.5rem;color:#005063\'>PAKORA</span>'">
+                <picture><source srcset="logo.webp" type="image/webp"><img src="logo.png" alt="Pakora GmbH" onerror="this.style.display='none'; this.parentNode.innerHTML='<span style=\'font-weight:700;font-size:1.5rem;color:#005063\'>PAKORA</span>'" width="522" height="266" fetchpriority="high"></picture>
             </a>
 
             <nav class="desktop-nav">
@@ -531,7 +533,7 @@
     </header>
 
     <section class="hero">
-        <video autoplay muted loop playsinline preload="metadata" class="hero-video">
+        <video autoplay muted loop playsinline preload="metadata" class="hero-video" poster="video-poster.webp">
             <source src="video.mp4" type="video/mp4">
         </video>
         <div class="hero-overlay"></div>
